@@ -9,6 +9,7 @@ import {
   Button,
   ScrollView,
   TouchableOpacity,
+  Image,
   Alert,
 } from "react-native";
 import uuid from "react-native-uuid";
@@ -16,13 +17,22 @@ import uuid from "react-native-uuid";
 export default function HomeScreen() {
   const [search, setSearch] = useState("");
   const [recipes, setRecipes] = useState([]);
+  const [noResults, setNoResults] = useState(true);
 
   const getRecipes = () => {
     fetch(
       `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=421e758d&app_key=53eb91ce7193440e3ad590fabd2c1509&type=public`
     )
       .then((res) => res.json())
-      .then((data) => setRecipes(data.hits))
+      .then((data) => {
+        if (data.count !== 0) {
+          setRecipes(data.hits);
+          setNoResults(false);
+        } else {
+          setRecipes(data.hits);
+          setNoResults(true);
+        }
+      })
       .catch((err) => console.log(err));
   };
 
@@ -40,19 +50,29 @@ export default function HomeScreen() {
           clearButtonMode="while-editing"
         />
         <Button title="Get Recipes" onPress={getRecipes} />
-        {/* <ScrollView style={{ maxHeight: 200 }}> */}
-        <ScrollView>
-          <View style={styles.cardContainer}>
-            {recipes.map((data) => (
-              <TouchableOpacity
-                style={styles.cardItem}
-                onPress={() => Alert.alert(data.recipe.label)}
-              >
-                <Text key={uuid.v4()}>{data.recipe.label}</Text>
-              </TouchableOpacity>
-            ))}
+        {noResults ? (
+          <View>
+            <Text>No Results</Text>
           </View>
-        </ScrollView>
+        ) : (
+          <ScrollView style={{ maxHeight: 500 }}>
+            <View style={styles.cardContainer}>
+              {recipes.map((data) => (
+                <TouchableOpacity
+                  style={styles.cardItem}
+                  onPress={() => Alert.alert(data.recipe.label)}
+                  key={uuid.v4()}
+                >
+                  <Image
+                    source={{ uri: data.recipe.image }}
+                    style={{ width: "100%", height: "70%" }}
+                  />
+                  <Text style={styles.recipeTitle}>{data.recipe.label}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -83,17 +103,15 @@ const styles = StyleSheet.create({
   cardContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    // alignItems: "center",
     justifyContent: "center",
   },
 
   cardItem: {
     width: "45%",
     backgroundColor: "#FFF",
-    padding: 5,
     margin: 5,
     borderRadius: 5,
-    height: 100,
+    height: 150,
 
     shadowColor: "#000",
     shadowOffset: {
@@ -103,5 +121,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 1.84,
     elevation: 5,
+  },
+
+  recipeTitle: {
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    padding: 5,
   },
 });
