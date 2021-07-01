@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
   View,
@@ -27,6 +28,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="dark-content" translucent={true} />
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitle}>Welcome Back</Text>
       </View>
@@ -37,16 +39,19 @@ export default function HomeScreen() {
           onChangeText={setSearch}
           clearButtonMode="while-editing"
         />
-        <Button title="Press Me" onPress={getRecipes} />
-        <ScrollView style={{ maxHeight: 200 }}>
-          {recipes.map((data) => (
-            <TouchableOpacity
-              style={{ padding: 5 }}
-              onPress={() => Alert.alert(data.recipe.label)}
-            >
-              <Text key={uuid.v4()}>{data.recipe.label}</Text>
-            </TouchableOpacity>
-          ))}
+        <Button title="Get Recipes" onPress={getRecipes} />
+        {/* <ScrollView style={{ maxHeight: 200 }}> */}
+        <ScrollView>
+          <View style={styles.cardContainer}>
+            {recipes.map((data) => (
+              <TouchableOpacity
+                style={styles.cardItem}
+                onPress={() => Alert.alert(data.recipe.label)}
+              >
+                <Text key={uuid.v4()}>{data.recipe.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -73,5 +78,30 @@ const styles = StyleSheet.create({
     padding: 5,
     borderWidth: 1,
     borderRadius: 5,
+  },
+
+  cardContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    // alignItems: "center",
+    justifyContent: "center",
+  },
+
+  cardItem: {
+    width: "45%",
+    backgroundColor: "#FFF",
+    padding: 5,
+    margin: 5,
+    borderRadius: 5,
+    height: 100,
+
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 1.84,
+    elevation: 5,
   },
 });
