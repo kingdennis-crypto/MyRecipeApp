@@ -13,6 +13,7 @@ import {
   Alert,
 } from "react-native";
 import uuid from "react-native-uuid";
+import RecipeCard from "./RecipeCard";
 
 export default function HomeScreen() {
   const [search, setSearch] = useState("");
@@ -58,17 +59,7 @@ export default function HomeScreen() {
           <ScrollView style={{ maxHeight: 500 }}>
             <View style={styles.cardContainer}>
               {recipes.map((data) => (
-                <TouchableOpacity
-                  style={styles.cardItem}
-                  onPress={() => Alert.alert(data.recipe.label)}
-                  key={uuid.v4()}
-                >
-                  <Image
-                    source={{ uri: data.recipe.image }}
-                    style={{ width: "100%", height: "70%" }}
-                  />
-                  <Text style={styles.recipeTitle}>{data.recipe.label}</Text>
-                </TouchableOpacity>
+                <RecipeCard recipe={data.recipe} />
               ))}
             </View>
           </ScrollView>
