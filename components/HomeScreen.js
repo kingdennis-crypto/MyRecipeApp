@@ -10,6 +10,7 @@ import {
   ScrollView,
 } from "react-native";
 import RecipeCard from "./RecipeCard";
+import uuid from "react-native-uuid";
 
 export default function HomeScreen({ navigation }) {
   const [search, setSearch] = useState("");
@@ -55,7 +56,7 @@ export default function HomeScreen({ navigation }) {
           <ScrollView style={{ maxHeight: 500 }}>
             <View style={styles.cardContainer}>
               {recipes.map((data) => (
-                <RecipeCard recipe={data.recipe} />
+                <RecipeCard key={uuid.v4()} recipe={data.recipe} />
               ))}
             </View>
           </ScrollView>
