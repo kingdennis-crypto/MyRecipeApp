@@ -14,6 +14,8 @@ export default function DetailScreen({ route }) {
         <View style={styles.topTextContainer}>
           <Text style={styles.courseText}>{item.dishType}</Text>
           <Text style={styles.mealTypeText}>{item.mealType}</Text>
+          <Text style={styles.cuisineTypeText}>{item.cuisineType}</Text>
+          <Text style={styles.totalTimeText}>Time: {item.totalTime} Min</Text>
         </View>
         <Text style={styles.titleText}>{item.label}</Text>
         <ScrollView style={{ maxHeight: 300 }}>
@@ -70,9 +72,9 @@ const styles = StyleSheet.create({
   },
 
   titleText: {
-    fontSize: 32,
-    textAlign: "center",
-    fontWeight: "400",
+    fontSize: 28,
+    fontWeight: "bold",
+    padding: 5,
   },
 
   itemList: {
@@ -102,6 +104,7 @@ const styles = StyleSheet.create({
   topTextContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
+    marginBottom: 5,
   },
 
   courseText: {
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
     color: "rgb(54,159,108)",
     textTransform: "uppercase",
     fontWeight: "bold",
-    marginHorizontal: 5,
+    margin: 5,
   },
 
   mealTypeText: {
@@ -123,6 +126,28 @@ const styles = StyleSheet.create({
     color: "rgb(54,107,159)",
     textTransform: "uppercase",
     fontWeight: "bold",
-    marginHorizontal: 5,
+    margin: 5,
+  },
+
+  cuisineTypeText: {
+    borderRadius: 5,
+    padding: 5,
+    alignSelf: "flex-start",
+    backgroundColor: "rgb(246,231,231)",
+    color: "rgb(159,54,54)",
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    margin: 5,
+  },
+
+  totalTimeText: {
+    borderRadius: 5,
+    padding: 5,
+    alignSelf: "flex-start",
+    backgroundColor: "rgb(239,231,246)",
+    color: "rgb(103,54,159)",
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    margin: 5,
   },
 });
