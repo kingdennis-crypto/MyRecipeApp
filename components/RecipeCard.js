@@ -19,6 +19,7 @@ export default function RecipeCard(props) {
       <Text key={uuid.v4()} style={styles.recipeTitle}>
         {props.recipe.label}
       </Text>
+      <Text style={styles.mealTypeText}>{props.recipe.mealType}</Text>
     </TouchableOpacity>
   );
 }
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     margin: 5,
     borderRadius: 5,
-    height: 150,
+    height: 200,
 
     shadowColor: "#000",
     shadowOffset: {
@@ -46,5 +47,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 14,
     padding: 5,
+  },
+
+  mealTypeText: {
+    textAlign: "center",
+    fontSize: 12,
+    fontStyle: "italic",
+    color: "rgba(0,0,0,0.8)",
   },
 });
