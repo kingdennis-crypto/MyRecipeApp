@@ -8,14 +8,10 @@ import {
   TextInput,
   Button,
   ScrollView,
-  TouchableOpacity,
-  Image,
-  Alert,
 } from "react-native";
-import uuid from "react-native-uuid";
 import RecipeCard from "./RecipeCard";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [search, setSearch] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [noResults, setNoResults] = useState(true);
@@ -52,8 +48,8 @@ export default function HomeScreen() {
         />
         <Button title="Get Recipes" onPress={getRecipes} />
         {noResults ? (
-          <View>
-            <Text>No Results</Text>
+          <View style={styles.noResultsContainer}>
+            <Text style={styles.noResultText}>No Results</Text>
           </View>
         ) : (
           <ScrollView style={{ maxHeight: 500 }}>
@@ -97,27 +93,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  cardItem: {
-    width: "45%",
-    backgroundColor: "#FFF",
-    margin: 5,
-    borderRadius: 5,
-    height: 150,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 1.84,
-    elevation: 5,
+  noResultsContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    height: 300,
   },
 
-  recipeTitle: {
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    padding: 5,
+  noResultText: {
+    fontSize: 48,
   },
 });
