@@ -1,19 +1,24 @@
 import React from "react";
-import { Text, StyleSheet, Image, TouchableOpacity, Alert } from "react-native";
+import { Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import uuid from "react-native-uuid";
 
 export default function RecipeCard(props) {
+  const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={styles.cardItem}
-      onPress={() => Alert.alert(props.recipe.label)}
       key={uuid.v4()}
+      onPress={() => navigation.navigate("Detail", { item: props.recipe })}
     >
       <Image
+        key={uuid.v4()}
         source={{ uri: props.recipe.image }}
         style={{ width: "100%", height: "70%" }}
       />
-      <Text style={styles.recipeTitle}>{props.recipe.label}</Text>
+      <Text key={uuid.v4()} style={styles.recipeTitle}>
+        {props.recipe.label}
+      </Text>
     </TouchableOpacity>
   );
 }
