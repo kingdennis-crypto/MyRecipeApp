@@ -1,22 +1,34 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import uuid from "react-native-uuid";
 
 export default function DetailScreen({ route }) {
   const { item } = route.params;
-  console.log(item.label);
-  console.log(item.ingredients);
   return (
     <View>
       <Image
         source={{ uri: item.image }}
-        style={{ width: "100%", height: 300 }}
+        style={{ width: "100%", height: 250 }}
       />
       <View style={styles.textContainer}>
+        <View style={styles.topTextContainer}>
+          <Text style={styles.courseText}>{item.dishType}</Text>
+          <Text style={styles.mealTypeText}>{item.mealType}</Text>
+        </View>
         <Text style={styles.titleText}>{item.label}</Text>
-        <Text>{item.dishType}</Text>
         <ScrollView style={{ maxHeight: 300 }}>
+          {item.dietLabels.map((data) => (
+            <Text>{data}</Text>
+          ))}
+          {item.cautions.map((data) => (
+            <Text>{data}</Text>
+          ))}
+          {item.healthLabels.map((data) => (
+            <Text>{data}</Text>
+          ))}
+          {/* <ScrollView style={{ maxHeight: 400 }}> */}
           {item.ingredients.map((data) => (
-            <View style={styles.itemList}>
+            <View key={uuid.v4()} style={styles.itemList}>
               <Image
                 source={{ uri: data.image }}
                 style={{ width: 50, height: 50 }}
@@ -24,6 +36,7 @@ export default function DetailScreen({ route }) {
               <Text style={styles.ingredientText}>{data.text}</Text>
             </View>
           ))}
+          {/* </ScrollView> */}
         </ScrollView>
       </View>
     </View>
@@ -84,5 +97,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 16,
     fontWeight: "500",
+  },
+
+  topTextContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+
+  courseText: {
+    borderRadius: 5,
+    padding: 5,
+    alignSelf: "flex-start",
+    backgroundColor: "rgb(231,246,237)",
+    color: "rgb(54,159,108)",
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    marginHorizontal: 5,
+  },
+
+  mealTypeText: {
+    borderRadius: 5,
+    padding: 5,
+    alignSelf: "flex-start",
+    backgroundColor: "rgb(231,238,246)",
+    color: "rgb(54,107,159)",
+    textTransform: "uppercase",
+    fontWeight: "bold",
+    marginHorizontal: 5,
   },
 });
