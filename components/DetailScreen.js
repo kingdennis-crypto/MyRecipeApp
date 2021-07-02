@@ -4,6 +4,7 @@ import uuid from "react-native-uuid";
 
 export default function DetailScreen({ route }) {
   const { item } = route.params;
+  console.log(item.dishType);
   return (
     <View>
       <Image
@@ -12,10 +13,26 @@ export default function DetailScreen({ route }) {
       />
       <View style={styles.textContainer}>
         <View style={styles.topTextContainer}>
-          <Text style={styles.courseText}>{item.dishType}</Text>
-          <Text style={styles.mealTypeText}>{item.mealType}</Text>
-          <Text style={styles.cuisineTypeText}>{item.cuisineType}</Text>
-          <Text style={styles.totalTimeText}>Time: {item.totalTime} Min</Text>
+          {item.dishType === undefined ? (
+            <Text style={styles.courseText}>No Dishtype</Text>
+          ) : (
+            <Text style={styles.courseText}>{item.dishType}</Text>
+          )}
+          {item.mealType === undefined ? (
+            <Text style={styles.mealTypeText}>No Mealtype</Text>
+          ) : (
+            <Text style={styles.mealTypeText}>{item.mealType}</Text>
+          )}
+          {item.cuisineType === undefined ? (
+            <Text style={styles.cuisineTypeText}>No cuisineType</Text>
+          ) : (
+            <Text style={styles.cuisineTypeText}>{item.cuisineType}</Text>
+          )}
+          {item.totalTime === 0 ? (
+            <Text style={styles.totalTimeText}>No Time Given</Text>
+          ) : (
+            <Text style={styles.totalTimeText}>Time: {item.totalTime} Min</Text>
+          )}
         </View>
         <Text style={styles.titleText}>{item.label}</Text>
         <ScrollView style={{ maxHeight: 300 }}>
