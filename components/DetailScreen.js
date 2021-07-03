@@ -76,14 +76,47 @@ export default function DetailScreen({ navigation, route }) {
           ) : (
             <Text style={styles.cuisineTypeText}>{item.cuisineType}</Text>
           )}
-          {item.totalTime === 0 ? (
-            <Text style={styles.totalTimeText}>No Time Given</Text>
-          ) : (
-            <Text style={styles.totalTimeText}>Time: {item.totalTime} Min</Text>
-          )}
+          <View style={styles.detailsRow}>
+            <View style={styles.detailContainer}>
+              <Image
+                source={require("../assets/DetailScreen/tinder.png")}
+                style={styles.detailImage}
+              />
+              <Text style={styles.detailText}>
+                {Math.ceil(item.calories)} kcal
+              </Text>
+            </View>
+            <View style={styles.detailContainer}>
+              <Image
+                source={require("../assets/DetailScreen/weight-scale.png")}
+                style={styles.detailImage}
+              />
+              <Text style={styles.detailText}>
+                {Math.ceil(item.totalWeight)} gram
+              </Text>
+            </View>
+            <View style={styles.detailContainer}>
+              <Image
+                source={require("../assets/DetailScreen/clock.png")}
+                style={styles.detailImage}
+              />
+              <Text style={styles.detailText}>{item.totalTime} min</Text>
+            </View>
+          </View>
         </View>
+        <ScrollView style={{ maxHeight: 200 }} horizontal>
+          {item.ingredients.map((data) => (
+            <View key={uuid.v4()} style={styles.itemList}>
+              <Image
+                source={{ uri: data.image }}
+                style={{ width: 50, height: 50 }}
+              />
+              <Text style={styles.ingredientText}>{data.text}</Text>
+            </View>
+          ))}
+        </ScrollView>
 
-        <ScrollView style={{ maxHeight: 300 }}>
+        <ScrollView style={{ maxHeight: 100 }}>
           {item.dietLabels.map((data) => (
             <Text>{data}</Text>
           ))}
@@ -113,6 +146,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+
+  detailsRow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    width: "100%",
+    marginVertical: 10,
+  },
+
+  detailContainer: {
+    // backgroundColor: "rgba(0,0,0,0.3)",
+    padding: 10,
+    width: 90,
+    alignItems: "center",
+  },
+
+  detailImage: {
+    width: 32,
+    height: 32,
+  },
+
+  detailText: {
+    paddingVertical: 7,
   },
 
   textContainer: {
