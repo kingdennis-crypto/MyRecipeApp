@@ -17,6 +17,8 @@ export default function DetailScreen({ navigation, route }) {
   const { item } = route.params;
   const recipeLink = item.url;
 
+  console.log(item.yield);
+
   return (
     <View>
       <Image
@@ -104,7 +106,14 @@ export default function DetailScreen({ navigation, route }) {
             </View>
           </View>
         </View>
-        <Text style={{ fontSize: 22, fontWeight: "bold", padding: 8 }}>
+        <Text
+          style={{
+            fontSize: 22,
+            fontWeight: "bold",
+            paddingHorizontal: 8,
+            paddingBottom: 5,
+          }}
+        >
           Ingredients:
         </Text>
         <ScrollView style={{ maxHeight: 200 }} horizontal>
@@ -118,7 +127,7 @@ export default function DetailScreen({ navigation, route }) {
             </View>
           ))}
         </ScrollView>
-        <ScrollView style={{ maxHeight: 100 }}>
+        {/* <ScrollView style={{ maxHeight: 100 }}>
           {item.dietLabels.map((data) => (
             <Text>{data}</Text>
           ))}
@@ -128,16 +137,7 @@ export default function DetailScreen({ navigation, route }) {
           {item.healthLabels.map((data) => (
             <Text>{data}</Text>
           ))}
-          {item.ingredients.map((data) => (
-            <View key={uuid.v4()} style={styles.itemList}>
-              <Image
-                source={{ uri: data.image }}
-                style={{ width: 50, height: 50 }}
-              />
-              <Text style={styles.ingredientText}>{data.text}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </View>
   );
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
-    marginVertical: 10,
+    // marginVertical: 5,
   },
 
   detailContainer: {
