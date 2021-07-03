@@ -30,7 +30,7 @@ export default function DetailScreen({ navigation, route }) {
           position: "absolute",
           top: 60,
           left: 20,
-          backgroundColor: "rgba(255,255,255,0.4)",
+          backgroundColor: "rgba(255,255,255,0.6)",
           padding: 5,
           borderRadius: 5,
         }}
@@ -152,7 +152,6 @@ const styles = StyleSheet.create({
   },
 
   ingredientContainer: {
-    // backgroundColor: "rgba(0,0,0,0.5)",
     marginHorizontal: 5,
     borderRadius: 5,
     width: 200,
@@ -163,11 +162,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "100%",
-    // marginVertical: 5,
   },
 
   detailContainer: {
-    // backgroundColor: "rgba(0,0,0,0.3)",
     padding: 10,
     width: 90,
     alignItems: "center",
