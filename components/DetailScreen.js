@@ -121,6 +121,7 @@ export default function DetailScreen({ navigation, route }) {
             <View key={uuid.v4()} style={styles.ingredientContainer}>
               <Image
                 source={{ uri: data.image }}
+                defaultSource={require("../assets/DetailScreen/no-photos.png")}
                 style={{ width: 150, height: 150, borderRadius: 15 }}
               />
               <Text style={styles.ingredientText}>{data.text}</Text>
