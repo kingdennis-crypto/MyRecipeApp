@@ -104,18 +104,20 @@ export default function DetailScreen({ navigation, route }) {
             </View>
           </View>
         </View>
+        <Text style={{ fontSize: 22, fontWeight: "bold", padding: 8 }}>
+          Ingredients:
+        </Text>
         <ScrollView style={{ maxHeight: 200 }} horizontal>
           {item.ingredients.map((data) => (
-            <View key={uuid.v4()} style={styles.itemList}>
+            <View key={uuid.v4()} style={styles.ingredientContainer}>
               <Image
                 source={{ uri: data.image }}
-                style={{ width: 50, height: 50 }}
+                style={{ width: 150, height: 150, borderRadius: 15 }}
               />
               <Text style={styles.ingredientText}>{data.text}</Text>
             </View>
           ))}
         </ScrollView>
-
         <ScrollView style={{ maxHeight: 100 }}>
           {item.dietLabels.map((data) => (
             <Text>{data}</Text>
@@ -145,6 +147,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
+  },
+
+  ingredientContainer: {
+    // backgroundColor: "rgba(0,0,0,0.5)",
+    marginHorizontal: 5,
+    borderRadius: 5,
+    width: 200,
     alignItems: "center",
   },
 
