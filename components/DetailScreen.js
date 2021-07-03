@@ -1,17 +1,65 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Linking,
+  Alert,
+  TouchableOpacity,
+  TouchableHighlight,
+} from "react-native";
+import { WebView } from "react-native-webview";
 import uuid from "react-native-uuid";
 
-export default function DetailScreen({ route }) {
+export default function DetailScreen({ navigation, route }) {
   const { item } = route.params;
-  console.log(item.dishType);
+  const recipeLink = item.url;
+
   return (
     <View>
       <Image
         source={{ uri: item.image }}
         style={{ width: "100%", height: 250 }}
       />
+      <TouchableOpacity
+        style={{
+          position: "absolute",
+          top: 60,
+          left: 20,
+          backgroundColor: "rgba(255,255,255,0.4)",
+          padding: 5,
+          borderRadius: 5,
+        }}
+        onPress={() => navigation.goBack()}
+      >
+        <Image
+          source={require("../assets/back.png")}
+          style={{
+            width: 24,
+            height: 24,
+          }}
+        />
+      </TouchableOpacity>
       <View style={styles.textContainer}>
+        <Text style={styles.titleText}>{item.label}</Text>
+        <View style={styles.linkContainer}>
+          <Text style={styles.linkName}>{item.source}</Text>
+          <Text
+            style={styles.linkBringMeThere}
+            onPress={() => {
+              const supported = Linking.canOpenURL(recipeLink);
+              if (supported) {
+                Linking.openURL(recipeLink);
+              } else {
+                Alert.alert(`I can't open this link: ${recipeLink}`);
+              }
+            }}
+          >
+            Bring me there
+          </Text>
+        </View>
         <View style={styles.topTextContainer}>
           {item.dishType === undefined ? (
             <Text style={styles.courseText}>No Dishtype</Text>
@@ -34,7 +82,7 @@ export default function DetailScreen({ route }) {
             <Text style={styles.totalTimeText}>Time: {item.totalTime} Min</Text>
           )}
         </View>
-        <Text style={styles.titleText}>{item.label}</Text>
+
         <ScrollView style={{ maxHeight: 300 }}>
           {item.dietLabels.map((data) => (
             <Text>{data}</Text>
@@ -45,7 +93,6 @@ export default function DetailScreen({ route }) {
           {item.healthLabels.map((data) => (
             <Text>{data}</Text>
           ))}
-          {/* <ScrollView style={{ maxHeight: 400 }}> */}
           {item.ingredients.map((data) => (
             <View key={uuid.v4()} style={styles.itemList}>
               <Image
@@ -55,7 +102,6 @@ export default function DetailScreen({ route }) {
               <Text style={styles.ingredientText}>{data.text}</Text>
             </View>
           ))}
-          {/* </ScrollView> */}
         </ScrollView>
       </View>
     </View>
@@ -91,7 +137,28 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 28,
     fontWeight: "bold",
+    paddingHorizontal: 5,
+  },
+
+  linkContainer: {
+    flexDirection: "row",
     padding: 5,
+    alignItems: "center",
+    marginBottom: 7,
+  },
+
+  linkName: {
+    fontSize: 16,
+    paddingRight: 5,
+    color: "rgb(168, 168, 168)",
+    fontWeight: "500",
+  },
+
+  linkBringMeThere: {
+    fontSize: 16,
+    paddingHorizontal: 5,
+    color: "rgb(106, 76, 199)",
+    fontWeight: "bold",
   },
 
   itemList: {
