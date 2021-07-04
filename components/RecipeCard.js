@@ -15,7 +15,8 @@ export default function RecipeCard(props) {
         style={{
           width: "100%",
           height: 80,
-          borderRadius: 15,
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
         }}
       />
       <View style={styles.mealTypeContainer}>
@@ -25,12 +26,14 @@ export default function RecipeCard(props) {
           <Text style={styles.mealTypeText}>{props.recipe.mealType}</Text>
         )}
       </View>
-      <Text style={styles.recipeTitle}>{props.recipe.label}</Text>
-      {props.recipe.cuisineType === undefined ? (
-        <Text style={styles.mealTypeText}>No Cuisine Type</Text>
-      ) : (
-        <Text style={styles.cuisineTypeText}>{props.recipe.cuisineType}</Text>
-      )}
+      <View style={styles.textContainer}>
+        <Text style={styles.recipeTitle}>{props.recipe.label}</Text>
+        {props.recipe.cuisineType === undefined ? (
+          <Text style={styles.mealTypeText}>No Cuisine Type</Text>
+        ) : (
+          <Text style={styles.cuisineTypeText}>{props.recipe.cuisineType}</Text>
+        )}
+      </View>
     </TouchableOpacity>
   );
 }
@@ -40,8 +43,7 @@ const styles = StyleSheet.create({
     width: "45%",
     backgroundColor: "#FFF",
     margin: 5,
-    borderRadius: 15,
-    padding: 10,
+    borderRadius: 10,
 
     shadowColor: "#000",
     shadowOffset: {
@@ -51,6 +53,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 1.84,
     elevation: 5,
+  },
+
+  textContainer: {
+    padding: 5,
   },
 
   recipeTitle: {
@@ -69,6 +75,9 @@ const styles = StyleSheet.create({
   },
 
   mealTypeContainer: {
+    position: "absolute",
+    top: 5,
+    left: 5,
     backgroundColor: "rgb(132,181,45)",
     padding: 3,
     margin: 5,
