@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
 
   const getRecipes = () => {
     fetch(
-      `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=421e758d&app_key=53eb91ce7193440e3ad590fabd2c1509&type=public`
+      `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=id&app_key=key&type=public`
     )
       .then((res) => res.json())
       .then((data) => {
