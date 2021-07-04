@@ -12,13 +12,11 @@ import {
 } from "react-native";
 import RecipeCard from "./RecipeCard";
 import uuid from "react-native-uuid";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen({ navigation }) {
   const [search, setSearch] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [noResults, setNoResults] = useState(true);
-  const [favorites, setFavorites] = useState([]);
 
   const getRecipes = () => {
     fetch(
@@ -38,10 +36,10 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <StatusBar barStyle="dark-content" translucent={true} />
       <View style={styles.headerTitleContainer}>
-        <Text style={styles.headerTitle}>Welcome Back</Text>
+        <Text style={styles.headerTitle}>Hello, John</Text>
       </View>
       <View style={styles.textInputContainer}>
         <TextInput
@@ -50,21 +48,21 @@ export default function HomeScreen({ navigation }) {
           onChangeText={setSearch}
           clearButtonMode="while-editing"
         />
-        <Button title="Get Recipes" onPress={getRecipes} />
-        {noResults ? (
-          <View style={styles.noResultsContainer}>
-            <Text style={styles.noResultText}>No Results</Text>
-          </View>
-        ) : (
-          <ScrollView style={{ maxHeight: 500 }}>
-            <View style={styles.cardContainer}>
-              {recipes.map((data) => (
-                <RecipeCard key={uuid.v4()} recipe={data.recipe} />
-              ))}
-            </View>
-          </ScrollView>
-        )}
       </View>
+      <Button title="Get Recipes" onPress={getRecipes} />
+      {noResults ? (
+        <View style={styles.noResultsContainer}>
+          <Text style={styles.noResultText}>No Results</Text>
+        </View>
+      ) : (
+        <ScrollView style={{ maxHeight: 500 }}>
+          <View style={styles.cardContainer}>
+            {recipes.map((data) => (
+              <RecipeCard key={uuid.v4()} recipe={data.recipe} />
+            ))}
+          </View>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 }
@@ -72,7 +70,6 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   switchContainer: {
     flexDirection: "row",
-    // backgroundColor: "rgba(0,0,0,0.3)",
     alignItems: "center",
   },
 
@@ -88,7 +85,7 @@ const styles = StyleSheet.create({
   },
 
   textInputContainer: {
-    padding: 20,
+    padding: 10,
   },
 
   textInput: {
