@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,16 +8,22 @@ import {
   Linking,
   Alert,
   TouchableOpacity,
-  TouchableHighlight,
 } from "react-native";
-import { WebView } from "react-native-webview";
 import uuid from "react-native-uuid";
 
 export default function DetailScreen({ navigation, route }) {
   const { item } = route.params;
   const recipeLink = item.url;
 
-  console.log(item.yield);
+  const [bookmarked, setBookmarked] = useState(false);
+
+  const [emptyBookmark, setEmptyBookmark] = useState(
+    require("../assets/DetailScreen/bookmark-empty.png")
+  );
+
+  const [filledBookmark, setFilledBookmark] = useState(
+    require("../assets/DetailScreen/bookmark-full.png")
+  );
 
   return (
     <View>
@@ -38,6 +44,31 @@ export default function DetailScreen({ navigation, route }) {
       >
         <Image
           source={require("../assets/back.png")}
+          style={{
+            width: 24,
+            height: 24,
+          }}
+        />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          position: "absolute",
+          top: 60,
+          right: 20,
+          backgroundColor: "rgba(255,255,255,0.6)",
+          padding: 5,
+          borderRadius: 5,
+        }}
+        onPress={() => {
+          if (bookmarked === true) {
+            setBookmarked(false);
+          } else {
+            setBookmarked(true);
+          }
+        }}
+      >
+        <Image
+          source={bookmarked ? filledBookmark : emptyBookmark}
           style={{
             width: 24,
             height: 24,
