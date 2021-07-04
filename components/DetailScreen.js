@@ -59,13 +59,6 @@ export default function DetailScreen({ navigation, route }) {
           padding: 5,
           borderRadius: 5,
         }}
-        onPress={() => {
-          if (bookmarked === true) {
-            setBookmarked(false);
-          } else {
-            setBookmarked(true);
-          }
-        }}
       >
         <Image
           source={bookmarked ? filledBookmark : emptyBookmark}

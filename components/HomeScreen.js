@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,14 +8,17 @@ import {
   TextInput,
   Button,
   ScrollView,
+  Switch,
 } from "react-native";
 import RecipeCard from "./RecipeCard";
 import uuid from "react-native-uuid";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomeScreen({ navigation }) {
   const [search, setSearch] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [noResults, setNoResults] = useState(true);
+  const [favorites, setFavorites] = useState([]);
 
   const getRecipes = () => {
     fetch(
@@ -67,6 +70,12 @@ export default function HomeScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  switchContainer: {
+    flexDirection: "row",
+    // backgroundColor: "rgba(0,0,0,0.3)",
+    alignItems: "center",
+  },
+
   headerTitleContainer: {
     height: 60,
     justifyContent: "center",
