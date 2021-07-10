@@ -2,7 +2,6 @@ import React from "react";
 import { Text, StyleSheet, Image, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import uuid from "react-native-uuid";
 
 export default function RecipeCard(props) {
   const navigation = useNavigation();
