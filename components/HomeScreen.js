@@ -7,6 +7,8 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableOpacity,
+  Alert,
 } from "react-native";
 import RecipeCard from "./RecipeCard";
 import uuid from "react-native-uuid";
@@ -22,6 +24,7 @@ export default function HomeScreen() {
   const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
+  const [mealTypes, setMealTypes] = useState([]);
 
   function SearchRecipes() {
     setIsLoading(true);
@@ -54,9 +57,50 @@ export default function HomeScreen() {
     }
   }
 
+  function setMeal(mealtype) {
+    if (mealTypes.indexOf(mealtype) !== -1) {
+      mealTypes.splice(mealTypes.indexOf(mealtype), 1);
+    } else {
+      setMealTypes([...mealTypes, mealtype]);
+    }
+  }
+
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" translucent={true} />
+      <ScrollView style={{ height: 100 }} horizontal>
+        <TouchableOpacity
+          style={{ margin: 5, padding: 5, borderWidth: 1 }}
+          onPress={() => setMeal("breakfast")}
+        >
+          <Text>Breakfast</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ margin: 5, padding: 5, borderWidth: 1 }}
+          onPress={() => setMeal("lunch")}
+        >
+          <Text>Lunch</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ margin: 5, padding: 5, borderWidth: 1 }}
+          onPress={() => setMeal("dinner")}
+        >
+          <Text>Dinner</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ margin: 5, padding: 5, borderWidth: 1 }}
+          onPress={() => setMeal("snack")}
+        >
+          <Text>Snack</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ margin: 5, padding: 5, borderWidth: 1 }}
+          onPress={() => setMeal("teatime")}
+        >
+          <Text>Teatime</Text>
+        </TouchableOpacity>
+      </ScrollView>
+      <Button title="Print" onPress={() => console.log(mealTypes)} />
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitle}>Hello, John</Text>
       </View>
@@ -76,12 +120,13 @@ export default function HomeScreen() {
           <Text style={styles.noResultText}>No Results</Text>
         </View>
       ) : (
-        <ScrollView style={{ maxHeight: 500 }}>
-          <View style={styles.cardContainer}>
-            {recipes.map((data) => (
-              <RecipeCard key={uuid.v4()} recipe={data.recipe} />
-            ))}
-          </View>
+        <ScrollView
+          style={{ maxHeight: "80%" }}
+          contentContainerStyle={styles.cardContainer}
+        >
+          {recipes.map((data) => (
+            <RecipeCard key={uuid.v4()} recipe={data.recipe} />
+          ))}
         </ScrollView>
       )}
     </SafeAreaView>
