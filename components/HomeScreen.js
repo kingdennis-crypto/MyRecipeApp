@@ -17,11 +17,13 @@ import { useNavigation } from "@react-navigation/native";
 export default function HomeScreen() {
   const navigation = useNavigation();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
 
   function SearchRecipes() {
+    setIsLoading(true);
     try {
       axios
         .get(
@@ -38,6 +40,8 @@ export default function HomeScreen() {
         });
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsLoading(false);
     }
   }
 
