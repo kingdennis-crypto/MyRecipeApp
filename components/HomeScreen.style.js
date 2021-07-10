@@ -21,10 +21,21 @@ export default StyleSheet.create({
     padding: 10,
   },
 
-  textInput: {
-    padding: 5,
+  defaultTextInput: {
+    padding: 10,
     borderWidth: 1,
-    borderRadius: 5,
+    borderColor: "rgba(0,0,0,0.0)",
+    borderRadius: 7,
+    backgroundColor: "#E4E4E4",
+  },
+
+  focusedTextInput: {
+    padding: 10,
+    borderWidth: 1,
+    // borderColor: "#0A3EED",
+    borderColor: "rgb(200,170,130)",
+    borderRadius: 7,
+    backgroundColor: "#E4E4E4",
   },
 
   cardContainer: {
