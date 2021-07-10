@@ -21,6 +21,7 @@ export default function HomeScreen() {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
 
   function SearchRecipes() {
     setIsLoading(true);
@@ -45,6 +46,14 @@ export default function HomeScreen() {
     }
   }
 
+  function onFocusChange() {
+    if (isFocused) {
+      setIsFocused(false);
+    } else {
+      setIsFocused(true);
+    }
+  }
+
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" translucent={true} />
@@ -53,7 +62,10 @@ export default function HomeScreen() {
       </View>
       <View style={styles.textInputContainer}>
         <TextInput
-          style={styles.textInput}
+          onFocus={onFocusChange}
+          onEndEditing={onFocusChange}
+          onSubmitEditing={SearchRecipes}
+          style={isFocused ? styles.focusedTextInput : styles.defaultTextInput}
           value={search}
           onChangeText={setSearch}
           clearButtonMode="while-editing"
