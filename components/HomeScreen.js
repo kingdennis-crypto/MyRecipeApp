@@ -71,7 +71,6 @@ export default function HomeScreen() {
           clearButtonMode="while-editing"
         />
       </View>
-      <Button title="Get Recipes" onPress={SearchRecipes} />
       {noResults ? (
         <View style={styles.noResultsContainer}>
           <Text style={styles.noResultText}>No Results</Text>
