@@ -8,44 +8,48 @@ import {
   Button,
   ScrollView,
   TouchableOpacity,
-  Alert,
+  StyleSheet,
 } from "react-native";
 import RecipeCard from "./RecipeCard";
 import uuid from "react-native-uuid";
 import styles from "./HomeScreen.style";
 import axios from "axios";
-import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
-
   const [isLoading, setIsLoading] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
-  const [mealTypes, setMealTypes] = useState([]);
+  const [mealTypes, setMealTypes] = useState("");
+  const [value, setValue] = useState(0);
+  const [recipeUrl, setRecipeUrl] = useState(
+    "https://api.edamam.com/api/recipes/v2?app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public"
+  );
 
   function SearchRecipes() {
-    setIsLoading(true);
+    console.log(recipeUrl);
+    if (mealTypes === "") {
+      setRecipeUrl(
+        `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
+      );
+    } else {
+      setRecipeUrl(
+        `https://api.edamam.com/api/recipes/v2?q=${search}&mealType=${mealTypes}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
+      );
+    }
+
     try {
-      axios
-        .get(
-          `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
-        )
-        .then((res) => {
-          console.log(res.data.count);
-          setRecipes(res.data.hits);
-          if (res.data.count === 0) {
-            setNoResults(true);
-          } else {
-            setNoResults(false);
-          }
-        });
+      axios.get(recipeUrl).then((res) => {
+        setRecipes(res.data.hits);
+        if (res.data.count === 0) {
+          setNoResults(true);
+        } else {
+          setNoResults(false);
+        }
+      });
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsLoading(false);
     }
   }
 
@@ -58,49 +62,15 @@ export default function HomeScreen() {
   }
 
   function setMeal(mealtype) {
-    if (mealTypes.indexOf(mealtype) !== -1) {
-      mealTypes.splice(mealTypes.indexOf(mealtype), 1);
-    } else {
-      setMealTypes([...mealTypes, mealtype]);
+    if (mealTypes !== mealtype) {
+      setMealTypes(mealtype);
     }
   }
 
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" translucent={true} />
-      <ScrollView style={{ height: 100 }} horizontal>
-        <TouchableOpacity
-          style={{ margin: 5, padding: 5, borderWidth: 1 }}
-          onPress={() => setMeal("breakfast")}
-        >
-          <Text>Breakfast</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{ margin: 5, padding: 5, borderWidth: 1 }}
-          onPress={() => setMeal("lunch")}
-        >
-          <Text>Lunch</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{ margin: 5, padding: 5, borderWidth: 1 }}
-          onPress={() => setMeal("dinner")}
-        >
-          <Text>Dinner</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{ margin: 5, padding: 5, borderWidth: 1 }}
-          onPress={() => setMeal("snack")}
-        >
-          <Text>Snack</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{ margin: 5, padding: 5, borderWidth: 1 }}
-          onPress={() => setMeal("teatime")}
-        >
-          <Text>Teatime</Text>
-        </TouchableOpacity>
-      </ScrollView>
-      <Button title="Print" onPress={() => console.log(mealTypes)} />
+
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitle}>Hello, John</Text>
       </View>
@@ -114,6 +84,58 @@ export default function HomeScreen() {
           onChangeText={setSearch}
           clearButtonMode="while-editing"
         />
+      </View>
+      <View style={newStyles.mealTypeContainer}>
+        <TouchableOpacity
+          style={
+            mealTypes === "breakfast"
+              ? newStyles.focusedSearchType
+              : newStyles.searchType
+          }
+          onPress={() => setMeal("breakfast")}
+        >
+          <Text>Breakfast</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={
+            mealTypes === "lunch"
+              ? newStyles.focusedSearchType
+              : newStyles.searchType
+          }
+          onPress={() => setMeal("lunch")}
+        >
+          <Text>Lunch</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={
+            mealTypes === "dinner"
+              ? newStyles.focusedSearchType
+              : newStyles.searchType
+          }
+          onPress={() => setMeal("dinner")}
+        >
+          <Text>Dinner</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={
+            mealTypes === "snack"
+              ? newStyles.focusedSearchType
+              : newStyles.searchType
+          }
+          onPress={() => setMeal("snack")}
+        >
+          <Text>Snack</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={
+            mealTypes === "teatime"
+              ? newStyles.focusedSearchType
+              : newStyles.searchType
+          }
+          onPress={() => setMeal("teatime")}
+        >
+          <Text>Teatime</Text>
+        </TouchableOpacity>
       </View>
       {noResults ? (
         <View style={styles.noResultsContainer}>
@@ -132,3 +154,26 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
+
+const newStyles = StyleSheet.create({
+  mealTypeContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 10,
+  },
+
+  searchType: {
+    margin: 5,
+    padding: 5,
+    borderWidth: 1,
+  },
+
+  focusedSearchType: {
+    margin: 5,
+    padding: 5,
+    borderWidth: 1,
+    backgroundColor: "rgba(0,0,0,0.3)",
+  },
+});
