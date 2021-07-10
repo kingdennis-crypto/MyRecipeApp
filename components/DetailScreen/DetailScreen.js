@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -8,7 +8,7 @@ import {
   Alert,
   TouchableOpacity,
 } from "react-native";
-import styles from "../../DetailScreen.style";
+import styles from "./DetailScreen.style.js";
 import uuid from "react-native-uuid";
 
 export default function DetailScreen({ navigation, route }) {
@@ -152,17 +152,6 @@ export default function DetailScreen({ navigation, route }) {
             </View>
           ))}
         </ScrollView>
-        {/* <ScrollView style={{ maxHeight: 100 }}>
-          {item.dietLabels.map((data) => (
-            <Text>{data}</Text>
-          ))}
-          {item.cautions.map((data) => (
-            <Text>{data}</Text>
-          ))}
-          {item.healthLabels.map((data) => (
-            <Text>{data}</Text>
-          ))}
-        </ScrollView> */}
       </View>
     </View>
   );
