@@ -3,37 +3,43 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   TextInput,
   Button,
   ScrollView,
-  Switch,
 } from "react-native";
 import RecipeCard from "./RecipeCard";
 import uuid from "react-native-uuid";
+import styles from "./HomeScreen.style";
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
-export default function HomeScreen({ navigation }) {
-  const [search, setSearch] = useState("");
+export default function HomeScreen() {
+  const navigation = useNavigation();
+
   const [recipes, setRecipes] = useState([]);
+  const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
 
-  const getRecipes = () => {
-    fetch(
-      `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=id&app_key=key&type=public`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.count !== 0) {
-          setRecipes(data.hits);
-          setNoResults(false);
-        } else {
-          setRecipes(data.hits);
-          setNoResults(true);
-        }
-      })
-      .catch((err) => console.log(err));
-  };
+  function SearchRecipes() {
+    try {
+      axios
+        .get(
+          `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
+        )
+        .then((res) => {
+          console.log(res.data.count);
+          setRecipes(res.data.hits);
+          if (res.data.count === 0) {
+            setNoResults(true);
+          } else {
+            setNoResults(false);
+          }
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <SafeAreaView>
@@ -49,7 +55,7 @@ export default function HomeScreen({ navigation }) {
           clearButtonMode="while-editing"
         />
       </View>
-      <Button title="Get Recipes" onPress={getRecipes} />
+      <Button title="Get Recipes" onPress={SearchRecipes} />
       {noResults ? (
         <View style={styles.noResultsContainer}>
           <Text style={styles.noResultText}>No Results</Text>
@@ -66,47 +72,3 @@ export default function HomeScreen({ navigation }) {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  switchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  headerTitleContainer: {
-    height: 60,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  headerTitle: {
-    fontSize: 42,
-    fontWeight: "bold",
-  },
-
-  textInputContainer: {
-    padding: 10,
-  },
-
-  textInput: {
-    padding: 5,
-    borderWidth: 1,
-    borderRadius: 5,
-  },
-
-  cardContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "center",
-  },
-
-  noResultsContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    height: 300,
-  },
-
-  noResultText: {
-    fontSize: 48,
-  },
-});
