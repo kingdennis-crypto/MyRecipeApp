@@ -67,6 +67,10 @@ export default function HomeScreen() {
     }
   }
 
+  function changeColor() {
+    console.log("NO");
+  }
+
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" translucent={true} />
@@ -85,58 +89,66 @@ export default function HomeScreen() {
           clearButtonMode="while-editing"
         />
       </View>
-      <View style={newStyles.mealTypeContainer}>
-        <TouchableOpacity
-          style={
-            mealTypes === "breakfast"
-              ? newStyles.focusedSearchType
-              : newStyles.searchType
-          }
-          onPress={() => setMeal("breakfast")}
-        >
-          <Text>Breakfast</Text>
+      <ScrollView
+        contentContainerStyle={newStyles.mealTypeContainer}
+        horizontal
+      >
+        <TouchableOpacity onPress={() => setMeal("breakfast")}>
+          <Text
+            style={
+              mealTypes === "breakfast"
+                ? newStyles.focusedMealType
+                : newStyles.normalMealType
+            }
+          >
+            Breakfast
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={
-            mealTypes === "lunch"
-              ? newStyles.focusedSearchType
-              : newStyles.searchType
-          }
-          onPress={() => setMeal("lunch")}
-        >
-          <Text>Lunch</Text>
+        <TouchableOpacity onPress={() => setMeal("lunch")}>
+          <Text
+            style={
+              mealTypes === "lunch"
+                ? newStyles.focusedMealType
+                : newStyles.normalMealType
+            }
+          >
+            Lunch
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={
-            mealTypes === "dinner"
-              ? newStyles.focusedSearchType
-              : newStyles.searchType
-          }
-          onPress={() => setMeal("dinner")}
-        >
-          <Text>Dinner</Text>
+        <TouchableOpacity onPress={() => setMeal("dinner")}>
+          <Text
+            style={
+              mealTypes === "dinner"
+                ? newStyles.focusedMealType
+                : newStyles.normalMealType
+            }
+          >
+            Dinner
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={
-            mealTypes === "snack"
-              ? newStyles.focusedSearchType
-              : newStyles.searchType
-          }
-          onPress={() => setMeal("snack")}
-        >
-          <Text>Snack</Text>
+        <TouchableOpacity onPress={() => setMeal("snack")}>
+          <Text
+            style={
+              mealTypes === "snack"
+                ? newStyles.focusedMealType
+                : newStyles.normalMealType
+            }
+          >
+            Snack
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={
-            mealTypes === "teatime"
-              ? newStyles.focusedSearchType
-              : newStyles.searchType
-          }
-          onPress={() => setMeal("teatime")}
-        >
-          <Text>Teatime</Text>
+        <TouchableOpacity onPress={() => setMeal("teatime")}>
+          <Text
+            style={
+              mealTypes === "teatime"
+                ? newStyles.focusedMealType
+                : newStyles.normalMealType
+            }
+          >
+            Teatime
+          </Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
       {noResults ? (
         <View style={styles.noResultsContainer}>
           <Text style={styles.noResultText}>No Results</Text>
@@ -164,16 +176,37 @@ const newStyles = StyleSheet.create({
     marginHorizontal: 10,
   },
 
-  searchType: {
+  focusedMealType: {
     margin: 5,
     padding: 5,
-    borderWidth: 1,
+    backgroundColor: "rgb(54,107,159)",
+    color: "rgb(231,238,246)",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+
+  normalMealType: {
+    margin: 5,
+    padding: 5,
+    backgroundColor: "rgb(231,238,246)",
+    color: "rgb(54,107,159)",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+
+  searchType: {
+    marginVertical: 3,
+    padding: 5,
+    backgroundColor: "rgb(231,238,246)",
+    color: "rgb(231,238,246)",
   },
 
   focusedSearchType: {
     margin: 5,
     padding: 5,
-    borderWidth: 1,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    backgroundColor: "rgb(54,107,159)",
+    color: "rgb(231,238,246)",
+    fontWeight: "bold",
+    textTransform: "uppercase",
   },
 });
