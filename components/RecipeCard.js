@@ -8,7 +8,7 @@ export default function RecipeCard(props) {
   return (
     <TouchableOpacity
       style={styles.cardItem}
-      onPress={() => navigation.navigate("Detail", { item: props.recipe })}
+      onPress={() => navigation.navigate("RecipePage", { item: props.recipe })}
     >
       <Image source={{ uri: props.recipe.image }} style={styles.cardImage} />
       <View style={styles.textContainer}>
