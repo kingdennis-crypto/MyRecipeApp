@@ -89,16 +89,13 @@ export default function HomeScreen() {
           clearButtonMode="while-editing"
         />
       </View>
-      <ScrollView
-        contentContainerStyle={newStyles.mealTypeContainer}
-        horizontal
-      >
+      <ScrollView contentContainerStyle={styles.mealTypeContainer} horizontal>
         <TouchableOpacity onPress={() => setMeal("breakfast")}>
           <Text
             style={
               mealTypes === "breakfast"
-                ? newStyles.focusedMealType
-                : newStyles.normalMealType
+                ? styles.focusedMealType
+                : styles.normalMealType
             }
           >
             Breakfast
@@ -108,8 +105,8 @@ export default function HomeScreen() {
           <Text
             style={
               mealTypes === "lunch"
-                ? newStyles.focusedMealType
-                : newStyles.normalMealType
+                ? styles.focusedMealType
+                : styles.normalMealType
             }
           >
             Lunch
@@ -119,8 +116,8 @@ export default function HomeScreen() {
           <Text
             style={
               mealTypes === "dinner"
-                ? newStyles.focusedMealType
-                : newStyles.normalMealType
+                ? styles.focusedMealType
+                : styles.normalMealType
             }
           >
             Dinner
@@ -130,8 +127,8 @@ export default function HomeScreen() {
           <Text
             style={
               mealTypes === "snack"
-                ? newStyles.focusedMealType
-                : newStyles.normalMealType
+                ? styles.focusedMealType
+                : styles.normalMealType
             }
           >
             Snack
@@ -141,8 +138,8 @@ export default function HomeScreen() {
           <Text
             style={
               mealTypes === "teatime"
-                ? newStyles.focusedMealType
-                : newStyles.normalMealType
+                ? styles.focusedMealType
+                : styles.normalMealType
             }
           >
             Teatime
@@ -166,47 +163,3 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
-
-const newStyles = StyleSheet.create({
-  mealTypeContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginHorizontal: 10,
-  },
-
-  focusedMealType: {
-    margin: 5,
-    padding: 5,
-    backgroundColor: "rgb(54,107,159)",
-    color: "rgb(231,238,246)",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-  },
-
-  normalMealType: {
-    margin: 5,
-    padding: 5,
-    backgroundColor: "rgb(231,238,246)",
-    color: "rgb(54,107,159)",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-  },
-
-  searchType: {
-    marginVertical: 3,
-    padding: 5,
-    backgroundColor: "rgb(231,238,246)",
-    color: "rgb(231,238,246)",
-  },
-
-  focusedSearchType: {
-    margin: 5,
-    padding: 5,
-    backgroundColor: "rgb(54,107,159)",
-    color: "rgb(231,238,246)",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-  },
-});

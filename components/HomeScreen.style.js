@@ -53,4 +53,30 @@ export default StyleSheet.create({
   noResultText: {
     fontSize: 48,
   },
+
+  mealTypeContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginHorizontal: 10,
+  },
+
+  focusedMealType: {
+    margin: 5,
+    padding: 5,
+    backgroundColor: "rgb(54,107,159)",
+    color: "rgb(231,238,246)",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+
+  normalMealType: {
+    margin: 5,
+    padding: 5,
+    backgroundColor: "rgb(231,238,246)",
+    color: "rgb(54,107,159)",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
 });
