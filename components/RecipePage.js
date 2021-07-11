@@ -1,9 +1,22 @@
-import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { Transition, Transitioning } from "react-native-reanimated";
 import uuid from "react-native-uuid";
+
+const transition = (
+  <Transition.Together>
+    <Transition.In type="fade" durationMs={200} />
+    <Transition.Change />
+    <Transition.Out type="fade" durationMs={200} />
+  </Transition.Together>
+);
 
 export default function RecipePage({ route }) {
   const item = route.params["item"];
+  const ref = React.useRef();
+  const [currentIndex, setCurrentIndex] = useState(null);
+  const number = Math.floor(Math.random() * 255);
+
   return (
     <View style={styles.container}>
       <Image
@@ -20,11 +33,35 @@ export default function RecipePage({ route }) {
         </View>
         <View style={styles.ingredientsContainer}>
           <Text style={styles.ingredientsTitle}>Ingredients</Text>
-          {item.ingredientLines.map((item) => (
-            <View key={uuid.v4()}>
-              <Text>{item}</Text>
-            </View>
-          ))}
+
+          <Transitioning.View ref={ref} transition={transition}>
+            {item.ingredients.map((item, index) => (
+              <TouchableOpacity
+                onPress={() => {
+                  ref.current.animateNextTransition();
+                  setCurrentIndex(index === currentIndex ? null : index);
+                }}
+                style={{ marginVertical: 10 }}
+                key={uuid.v4()}
+              >
+                <Text>{item.text}</Text>
+                {index === currentIndex && (
+                  <View
+                    style={{
+                      backgroundColor: `rgb(${number}, ${number}, ${number})`,
+                    }}
+                  >
+                    <Text>{item.foodCategory}</Text>
+                    <Text>{item.weight}</Text>
+                    <Image
+                      source={{ uri: item.image }}
+                      style={{ width: 100, height: 100, borderRadius: 7 }}
+                    />
+                  </View>
+                )}
+              </TouchableOpacity>
+            ))}
+          </Transitioning.View>
         </View>
       </View>
     </View>
@@ -32,6 +69,10 @@ export default function RecipePage({ route }) {
 }
 
 const styles = StyleSheet.create({
+  body: {
+    lineHeight: 20 * 1.5,
+  },
+
   container: {
     backgroundColor: "#f5f5f5",
     height: "100%",
