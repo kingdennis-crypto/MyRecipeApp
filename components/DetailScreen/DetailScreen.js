@@ -7,6 +7,7 @@ import {
   Linking,
   Alert,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
 import styles from "./DetailScreen.style.js";
 import uuid from "react-native-uuid";
@@ -156,3 +157,5 @@ export default function DetailScreen({ navigation, route }) {
     </View>
   );
 }
+
+const newStyles = StyleSheet.create({});
