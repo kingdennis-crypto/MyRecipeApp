@@ -4,7 +4,7 @@ import styles from "./HomeScreen.style";
 
 export default function MealtypeCard(props) {
   return (
-    <TouchableOpacity onPress={() => props.setMeal(props.name)}>
+    <TouchableOpacity onPress={() => props.changeMealType(props.name)}>
       <Text
         style={
           props.mealTypes === props.name
