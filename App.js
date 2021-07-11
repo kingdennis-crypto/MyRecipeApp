@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "./components/HomeScreen";
 import DetailScreen from "./components/DetailScreen/DetailScreen";
+import RecipePage from "./components/RecipePage";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -22,6 +23,7 @@ export default function App() {
           component={DetailScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="RecipePage" component={RecipePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
