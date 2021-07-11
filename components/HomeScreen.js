@@ -5,24 +5,21 @@ import {
   Text,
   SafeAreaView,
   TextInput,
-  Button,
   ScrollView,
   TouchableOpacity,
-  StyleSheet,
 } from "react-native";
 import RecipeCard from "./RecipeCard";
 import uuid from "react-native-uuid";
 import styles from "./HomeScreen.style";
 import axios from "axios";
+import MealtypeCard from "./MealtypeCard";
 
 export default function HomeScreen() {
-  const [isLoading, setIsLoading] = useState(false);
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
   const [mealTypes, setMealTypes] = useState("");
-  const [value, setValue] = useState(0);
   const [recipeUrl, setRecipeUrl] = useState(
     "https://api.edamam.com/api/recipes/v2?app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public"
   );
@@ -42,6 +39,7 @@ export default function HomeScreen() {
     try {
       axios.get(recipeUrl).then((res) => {
         setRecipes(res.data.hits);
+        setRecipeCount(res.data.count);
         if (res.data.count === 0) {
           setNoResults(true);
         } else {
@@ -62,13 +60,17 @@ export default function HomeScreen() {
   }
 
   function setMeal(mealtype) {
-    if (mealTypes !== mealtype) {
-      setMealTypes(mealtype);
-    }
-  }
+    setMealTypes(mealtype);
+    SearchRecipes();
 
-  function changeColor() {
-    console.log("NO");
+    // if (recipeCount > 0) {
+    //   console.log("Already searched");
+    // } else {
+    //   console.log("Not already searched");
+    // }
+    // if (mealTypes !== mealtype) {
+    //   setMealTypes(mealtype);
+    // }
   }
 
   return (
@@ -90,61 +92,15 @@ export default function HomeScreen() {
         />
       </View>
       <ScrollView contentContainerStyle={styles.mealTypeContainer} horizontal>
-        <TouchableOpacity onPress={() => setMeal("breakfast")}>
-          <Text
-            style={
-              mealTypes === "breakfast"
-                ? styles.focusedMealType
-                : styles.normalMealType
-            }
-          >
-            Breakfast
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setMeal("lunch")}>
-          <Text
-            style={
-              mealTypes === "lunch"
-                ? styles.focusedMealType
-                : styles.normalMealType
-            }
-          >
-            Lunch
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setMeal("dinner")}>
-          <Text
-            style={
-              mealTypes === "dinner"
-                ? styles.focusedMealType
-                : styles.normalMealType
-            }
-          >
-            Dinner
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setMeal("snack")}>
-          <Text
-            style={
-              mealTypes === "snack"
-                ? styles.focusedMealType
-                : styles.normalMealType
-            }
-          >
-            Snack
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => setMeal("teatime")}>
-          <Text
-            style={
-              mealTypes === "teatime"
-                ? styles.focusedMealType
-                : styles.normalMealType
-            }
-          >
-            Teatime
-          </Text>
-        </TouchableOpacity>
+        <MealtypeCard
+          mealTypes={mealTypes}
+          name="breakfast"
+          setMeal={setMeal}
+        />
+        <MealtypeCard mealTypes={mealTypes} name="lunch" setMeal={setMeal} />
+        <MealtypeCard mealTypes={mealTypes} name="dinner" setMeal={setMeal} />
+        <MealtypeCard mealTypes={mealTypes} name="snack" setMeal={setMeal} />
+        <MealtypeCard mealTypes={mealTypes} name="teatime" setMeal={setMeal} />
       </ScrollView>
       {noResults ? (
         <View style={styles.noResultsContainer}>
