@@ -14,16 +14,22 @@ import styles from "./HomeScreen.style";
 import axios from "axios";
 import MealtypeCard from "./MealtypeCard";
 import Icon from "react-native-vector-icons/Ionicons";
+import Modal from "react-native-modal";
+import NameModal from "./NameModal";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [mealTypes, setMealTypes] = useState("");
   const [recipeUrl, setRecipeUrl] = useState(
     `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
   );
+
+  const navigation = useNavigation();
 
   function SearchRecipes() {
     setRecipeUrl(
@@ -95,12 +101,15 @@ export default function HomeScreen() {
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" translucent={true} />
-
+      <NameModal isVisible={modalVisible} setIsVisible={setModalVisible} />
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitle}>Hello, John</Text>
-        <View style={{ justifyContent: "flex-end" }}>
+        <TouchableOpacity
+          style={{ justifyContent: "flex-end" }}
+          onPress={() => setModalVisible(true)}
+        >
           <Icon name="ellipsis-horizontal-circle" size={38} color="#000" />
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.textInputContainer}>
         <TextInput
