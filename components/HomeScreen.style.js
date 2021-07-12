@@ -8,8 +8,9 @@ export default StyleSheet.create({
 
   headerTitleContainer: {
     height: 60,
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
+    flexDirection: "row",
   },
 
   headerTitle: {
