@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { Transition, Transitioning } from "react-native-reanimated";
 import uuid from "react-native-uuid";
 
@@ -53,10 +60,10 @@ export default function RecipePage({ route }) {
                   >
                     <Text>{item.foodCategory}</Text>
                     <Text>{item.weight}</Text>
-                    <Image
+                    {/* <Image
                       source={{ uri: item.image }}
                       style={{ width: 100, height: 100, borderRadius: 7 }}
-                    />
+                    /> */}
                   </View>
                 )}
               </TouchableOpacity>
