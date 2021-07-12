@@ -16,10 +16,14 @@ import MealtypeCard from "./MealtypeCard";
 import Icon from "react-native-vector-icons/Ionicons";
 import Modal from "react-native-modal";
 import NameModal from "./NameModal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+
+// DONT FORGET USEFOCUSEFFECT TO TOGGLE THE NAME GET FUNCTION WHEN THE VIEW IS CHANGED
 
 export default function HomeScreen() {
   const [recipes, setRecipes] = useState([]);
+  const [name, setName] = useState("");
   const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
   const [isFocused, setIsFocused] = useState(false);
@@ -30,6 +34,21 @@ export default function HomeScreen() {
   );
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    getName();
+  }, []);
+
+  async function getName() {
+    try {
+      const value = await AsyncStorage.getItem("Name");
+      if (value !== null) {
+        setName(value);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   function SearchRecipes() {
     setRecipeUrl(
@@ -103,7 +122,7 @@ export default function HomeScreen() {
       <StatusBar barStyle="dark-content" translucent={true} />
       <NameModal isVisible={modalVisible} setIsVisible={setModalVisible} />
       <View style={styles.headerTitleContainer}>
-        <Text style={styles.headerTitle}>Hello, John</Text>
+        <Text style={styles.headerTitle}>Hello, {name}</Text>
         <TouchableOpacity
           style={{ justifyContent: "flex-end" }}
           onPress={() => setModalVisible(true)}
