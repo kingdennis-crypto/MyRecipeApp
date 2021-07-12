@@ -13,6 +13,7 @@ import uuid from "react-native-uuid";
 import styles from "./HomeScreen.style";
 import axios from "axios";
 import MealtypeCard from "./MealtypeCard";
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default function HomeScreen() {
   const [recipes, setRecipes] = useState([]);
@@ -21,25 +22,17 @@ export default function HomeScreen() {
   const [isFocused, setIsFocused] = useState(false);
   const [mealTypes, setMealTypes] = useState("");
   const [recipeUrl, setRecipeUrl] = useState(
-    "https://api.edamam.com/api/recipes/v2?app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public"
+    `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
   );
 
   function SearchRecipes() {
+    setRecipeUrl(
+      `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
+    );
     console.log(recipeUrl);
-    if (mealTypes === "") {
-      setRecipeUrl(
-        `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
-      );
-    } else {
-      setRecipeUrl(
-        `https://api.edamam.com/api/recipes/v2?q=${search}&mealType=${mealTypes}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
-      );
-    }
-
     try {
       axios.get(recipeUrl).then((res) => {
         setRecipes(res.data.hits);
-        setRecipeCount(res.data.count);
         if (res.data.count === 0) {
           setNoResults(true);
         } else {
@@ -59,19 +52,45 @@ export default function HomeScreen() {
     }
   }
 
-  function setMeal(mealtype) {
-    setMealTypes(mealtype);
-    SearchRecipes();
-
-    // if (recipeCount > 0) {
-    //   console.log("Already searched");
-    // } else {
-    //   console.log("Not already searched");
-    // }
-    // if (mealTypes !== mealtype) {
-    //   setMealTypes(mealtype);
-    // }
+  function changeMealType(mealtype) {
+    if (mealTypes === mealtype) {
+      setMealTypes("");
+    } else {
+      setMealTypes(mealtype);
+      setRecipeUrl(
+        `https://api.edamam.com/api/recipes/v2?q=${search}&mealType=${mealtype}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
+      );
+    }
   }
+
+  function changeSearch() {
+    console.log(search);
+    console.log(recipeUrl);
+    try {
+      axios
+        .get(recipeUrl)
+        .then((res) => {
+          setRecipes(res.data.hits);
+          if (res.data.count === 0) {
+            setNoResults(true);
+          } else {
+            setNoResults(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      console.log("End");
+    }
+  }
+
+  useEffect(() => {
+    console.log(mealTypes);
+    SearchRecipes();
+  }, [mealTypes]);
 
   return (
     <SafeAreaView>
@@ -79,15 +98,18 @@ export default function HomeScreen() {
 
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitle}>Hello, John</Text>
+        <View style={{ justifyContent: "flex-end" }}>
+          <Icon name="ellipsis-horizontal-circle" size={38} color="#000" />
+        </View>
       </View>
       <View style={styles.textInputContainer}>
         <TextInput
           onFocus={onFocusChange}
           onEndEditing={onFocusChange}
-          onSubmitEditing={SearchRecipes}
+          onSubmitEditing={changeSearch}
           style={isFocused ? styles.focusedTextInput : styles.defaultTextInput}
           value={search}
-          onChangeText={setSearch}
+          onChangeText={(text) => setSearch(text)}
           clearButtonMode="while-editing"
         />
       </View>
@@ -95,12 +117,28 @@ export default function HomeScreen() {
         <MealtypeCard
           mealTypes={mealTypes}
           name="breakfast"
-          setMeal={setMeal}
+          changeMealType={changeMealType}
         />
-        <MealtypeCard mealTypes={mealTypes} name="lunch" setMeal={setMeal} />
-        <MealtypeCard mealTypes={mealTypes} name="dinner" setMeal={setMeal} />
-        <MealtypeCard mealTypes={mealTypes} name="snack" setMeal={setMeal} />
-        <MealtypeCard mealTypes={mealTypes} name="teatime" setMeal={setMeal} />
+        <MealtypeCard
+          mealTypes={mealTypes}
+          name="lunch"
+          changeMealType={changeMealType}
+        />
+        <MealtypeCard
+          mealTypes={mealTypes}
+          name="dinner"
+          changeMealType={changeMealType}
+        />
+        <MealtypeCard
+          mealTypes={mealTypes}
+          name="snack"
+          changeMealType={changeMealType}
+        />
+        <MealtypeCard
+          mealTypes={mealTypes}
+          name="teatime"
+          changeMealType={changeMealType}
+        />
       </ScrollView>
       {noResults ? (
         <View style={styles.noResultsContainer}>
