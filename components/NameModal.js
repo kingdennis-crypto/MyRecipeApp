@@ -13,6 +13,7 @@ export default function NameModal(props) {
   // });
 
   async function StoreName() {
+    props.setValue(props.value + 1);
     try {
       await AsyncStorage.setItem("Name", name);
     } catch (e) {

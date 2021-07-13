@@ -23,6 +23,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
   const [recipes, setRecipes] = useState([]);
+  const [myValue, setMyValue] = useState(0);
   const [name, setName] = useState("");
   const [search, setSearch] = useState("");
   const [noResults, setNoResults] = useState(true);
@@ -37,7 +38,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     getName();
-  }, []);
+  }, [myValue]);
 
   async function getName() {
     try {
@@ -120,7 +121,12 @@ export default function HomeScreen() {
   return (
     <SafeAreaView>
       <StatusBar barStyle="dark-content" translucent={true} />
-      <NameModal isVisible={modalVisible} setIsVisible={setModalVisible} />
+      <NameModal
+        isVisible={modalVisible}
+        setIsVisible={setModalVisible}
+        value={myValue}
+        setValue={setMyValue}
+      />
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitle}>Hello, {name}</Text>
         <TouchableOpacity
