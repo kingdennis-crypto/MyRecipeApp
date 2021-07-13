@@ -67,7 +67,7 @@ export default StyleSheet.create({
     margin: 5,
     padding: 5,
     backgroundColor: "#3c2f2f",
-    color: "#fff4e6",
+    color: "#be9b7b",
     fontWeight: "bold",
     textTransform: "uppercase",
   },
@@ -75,7 +75,7 @@ export default StyleSheet.create({
   normalMealType: {
     margin: 5,
     padding: 5,
-    backgroundColor: "#fff4e6",
+    backgroundColor: "#be9b7b",
     color: "#3c2f2f",
     fontWeight: "bold",
     textTransform: "uppercase",
