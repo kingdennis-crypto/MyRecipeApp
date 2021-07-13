@@ -134,7 +134,7 @@ export default function HomeScreen() {
           style={{ justifyContent: "flex-end" }}
           onPress={() => setModalVisible(true)}
         >
-          <Icon name="ellipsis-horizontal-circle" size={38} color="#000" />
+          <Icon name="ellipsis-horizontal-circle" size={38} color="#3c2f2f" />
         </TouchableOpacity>
       </View>
       <View style={styles.textInputContainer}>
