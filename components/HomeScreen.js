@@ -119,7 +119,7 @@ export default function HomeScreen() {
   }, [mealTypes]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: "#fff4e6", height: "100%" }}>
       <StatusBar barStyle="dark-content" translucent={true} />
       <NameModal
         isVisible={modalVisible}
@@ -149,7 +149,11 @@ export default function HomeScreen() {
           placeholder="Search..."
         />
       </View>
-      <ScrollView contentContainerStyle={styles.mealTypeContainer} horizontal>
+      <ScrollView
+        style={{ maxHeight: 50 }}
+        contentContainerStyle={styles.mealTypeContainer}
+        horizontal
+      >
         <MealtypeCard
           mealTypes={mealTypes}
           name="breakfast"
