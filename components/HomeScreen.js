@@ -126,6 +126,7 @@ export default function HomeScreen() {
         setIsVisible={setModalVisible}
         value={myValue}
         setValue={setMyValue}
+        name={name}
       />
       <View style={styles.headerTitleContainer}>
         <Text style={styles.headerTitle}>Hello, {name}</Text>
