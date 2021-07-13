@@ -146,6 +146,7 @@ export default function HomeScreen() {
           value={search}
           onChangeText={(text) => setSearch(text)}
           clearButtonMode="while-editing"
+          placeholder="Search..."
         />
       </View>
       <ScrollView contentContainerStyle={styles.mealTypeContainer} horizontal>
