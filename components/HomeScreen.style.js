@@ -28,7 +28,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(0,0,0,0.0)",
     borderRadius: 7,
-    backgroundColor: "#E4E4E4",
+    backgroundColor: "#f2dec4",
   },
 
   focusedTextInput: {
@@ -49,7 +49,7 @@ export default StyleSheet.create({
   noResultsContainer: {
     justifyContent: "center",
     alignItems: "center",
-    height: 300,
+    flex: 1,
   },
 
   noResultText: {
@@ -64,6 +64,7 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginHorizontal: 10,
+    height: 50,
   },
 
   focusedMealType: {
