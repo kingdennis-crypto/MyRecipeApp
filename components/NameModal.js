@@ -7,10 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function NameModal(props) {
   const [name, setName] = useState("");
-
-  // useEffect(() => {
-  //   GetName();
-  // });
+  const [isFocused, setIsFocused] = useState(false);
 
   async function StoreName() {
     props.setValue(props.value + 1);
@@ -45,15 +42,20 @@ export default function NameModal(props) {
             alignItems: "center",
             backgroundColor: "#FFF",
             marginVertical: 200,
+            borderRadius: 7,
           }}
         >
           <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Please change your name</Text>
-            <Text style={styles.oldNameText}>Old Name: Dennis</Text>
+            <Text style={styles.oldNameText}>Old Name: {props.name}</Text>
           </View>
           <View style={styles.textInputContainer}>
             <TextInput
-              style={{ padding: 3, borderWidth: 1 }}
+              onFocus={() => setIsFocused(!isFocused)}
+              onEndEditing={() => setIsFocused(!isFocused)}
+              style={
+                isFocused ? styles.focusedTextInput : styles.textInputStyle
+              }
               onChangeText={setName}
               value={name}
               placeholder="Enter your name"
@@ -87,5 +89,21 @@ const styles = StyleSheet.create({
 
   textInputContainer: {
     width: "90%",
+  },
+
+  textInputStyle: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.0)",
+    borderRadius: 7,
+    backgroundColor: "#E4E4E4",
+  },
+
+  focusedTextInput: {
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "rgb(200,170,130)",
+    borderRadius: 7,
+    backgroundColor: "#E4E4E4",
   },
 });
