@@ -59,7 +59,7 @@ export default function NameModal(props) {
             <Text
               style={{
                 textTransform: "uppercase",
-                color: "rgba(0,0,0,0.8)",
+                color: "rgba(0,0,0,0.6)",
                 fontWeight: "500",
               }}
             >
