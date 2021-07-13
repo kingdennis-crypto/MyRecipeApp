@@ -16,6 +16,7 @@ export default StyleSheet.create({
   headerTitle: {
     fontSize: 42,
     fontWeight: "bold",
+    color: "#3c2f2f",
   },
 
   textInputContainer: {
@@ -34,7 +35,7 @@ export default StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     // borderColor: "#0A3EED",
-    borderColor: "rgb(200,170,130)",
+    borderColor: "#3c2f2f",
     borderRadius: 7,
     backgroundColor: "#E4E4E4",
   },
@@ -53,6 +54,8 @@ export default StyleSheet.create({
 
   noResultText: {
     fontSize: 48,
+    color: "#3c2f2f",
+    fontWeight: "500",
   },
 
   mealTypeContainer: {
