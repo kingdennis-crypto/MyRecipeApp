@@ -12,11 +12,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // https://github.com/react-native-modal/react-native-modal
 
-// #051e3e
-// #251e3e
-// #451e3e
-// #651e3e
-// #851e3e
+// #4b3832
+// #854442
+// #fff4e6
+// #3c2f2f
+// #be9b7b
 
 export default function NameModal(props) {
   const [name, setName] = useState("");
@@ -53,13 +53,20 @@ export default function NameModal(props) {
       >
         <View style={styles.modalContainer}>
           <View style={styles.titleContainer}>
-            <Text style={{ fontSize: 26, fontWeight: "600", marginBottom: 3 }}>
+            <Text
+              style={{
+                fontSize: 26,
+                fontWeight: "600",
+                marginBottom: 3,
+                color: "#3c2f2f",
+              }}
+            >
               Please change your name
             </Text>
             <Text
               style={{
                 textTransform: "uppercase",
-                color: "rgba(0,0,0,0.6)",
+                color: "#4b3832",
                 fontWeight: "500",
               }}
             >
@@ -75,10 +82,10 @@ export default function NameModal(props) {
               }
               onChangeText={setName}
               value={name}
-              placeholder="Enter your name"
+              placeholder="Enter your name..."
             />
             <Pressable style={styles.submitButton}>
-              <Button title="Change Name" onPress={StoreName} color="#FFF" />
+              <Button title="Change Name" onPress={StoreName} color="#fff4e6" />
             </Pressable>
           </View>
         </View>
@@ -118,7 +125,7 @@ const styles = StyleSheet.create({
   submitButton: {
     padding: 5,
     marginTop: 10,
-    backgroundColor: "#051e3e",
+    backgroundColor: "#3c2f2f",
     borderRadius: 7,
   },
 });
