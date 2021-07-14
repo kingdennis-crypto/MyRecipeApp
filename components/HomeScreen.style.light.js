@@ -1,6 +1,33 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
+  modalContainer: {
+    backgroundColor: "#fff4e6",
+    borderRadius: 7,
+    height: "50%",
+    padding: 10,
+  },
+
+  modalTitle: {
+    fontSize: 26,
+    fontWeight: "600",
+    marginBottom: 3,
+    color: "#3c2f2f",
+  },
+
+  modalOldName: {
+    textTransform: "uppercase",
+    color: "#3c2f2f",
+    fontWeight: "500",
+  },
+
+  submitButton: {
+    padding: 5,
+    marginTop: 10,
+    backgroundColor: "#3c2f2f",
+    borderRadius: 7,
+  },
+
   backgroundStyle: {
     backgroundColor: "#fff4e6",
     height: "100%",
