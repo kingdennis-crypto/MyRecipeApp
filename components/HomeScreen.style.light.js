@@ -69,7 +69,8 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginHorizontal: 10,
-    height: 50,
+    marginBottom: 7,
+    // height: 50,
   },
 
   focusedMealType: {
