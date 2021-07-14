@@ -7,21 +7,21 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
 import RecipeCard from "./RecipeCard";
 import uuid from "react-native-uuid";
-import styles from "./HomeScreen.style";
+import styles from "./HomeScreen.style.light";
+import darkStyles from "./HomeScreen.style.dark";
 import axios from "axios";
 import MealtypeCard from "./MealtypeCard";
 import Icon from "react-native-vector-icons/Ionicons";
-import Modal from "react-native-modal";
 import NameModal from "./NameModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { Appearance } from "react-native-appearance";
 
-// DONT FORGET USEFOCUSEFFECT TO TOGGLE THE NAME GET FUNCTION WHEN THE VIEW IS CHANGED
-
-export default function HomeScreen() {
+export default function HomeScreen(props) {
   const [recipes, setRecipes] = useState([]);
   const [myValue, setMyValue] = useState(0);
   const [name, setName] = useState("");
@@ -33,12 +33,19 @@ export default function HomeScreen() {
   const [recipeUrl, setRecipeUrl] = useState(
     `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
   );
+  const [isDark, setIsDark] = useState(colorScheme === "dark");
 
   const navigation = useNavigation();
+  const colorScheme = useColorScheme();
+  const themeStyle = isDark ? darkStyles : styles;
 
   useEffect(() => {
     getName();
   }, [myValue]);
+
+  useEffect(() => {
+    setIsDark(colorScheme === "dark");
+  }, [colorScheme]);
 
   async function getName() {
     try {
@@ -114,12 +121,11 @@ export default function HomeScreen() {
   }
 
   useEffect(() => {
-    console.log(mealTypes);
     SearchRecipes();
   }, [mealTypes]);
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#fff4e6", height: "100%" }}>
+    <SafeAreaView style={themeStyle.backgroundStyle}>
       <StatusBar barStyle="dark-content" translucent={true} />
       <NameModal
         isVisible={modalVisible}
@@ -129,12 +135,16 @@ export default function HomeScreen() {
         name={name}
       />
       <View style={styles.headerTitleContainer}>
-        <Text style={styles.headerTitle}>Hello, {name}</Text>
+        <Text style={themeStyle.headerTitle}>Hello, {name}</Text>
         <TouchableOpacity
           style={{ justifyContent: "flex-end" }}
           onPress={() => setModalVisible(true)}
         >
-          <Icon name="ellipsis-horizontal-circle" size={38} color="#3c2f2f" />
+          <Icon
+            name="ellipsis-horizontal-circle"
+            size={38}
+            color={isDark ? "#fff4e6" : "#3c2f2f"}
+          />
         </TouchableOpacity>
       </View>
       <View style={styles.textInputContainer}>
