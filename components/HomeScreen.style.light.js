@@ -66,7 +66,6 @@ export default StyleSheet.create({
   focusedTextInput: {
     padding: 10,
     borderWidth: 1,
-    // borderColor: "#0A3EED",
     borderColor: "#3c2f2f",
     borderRadius: 7,
     backgroundColor: "#f2dec4",
@@ -79,7 +78,7 @@ export default StyleSheet.create({
   },
 
   noResultsContainer: {
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     flex: 1,
   },
@@ -88,16 +87,14 @@ export default StyleSheet.create({
     fontSize: 48,
     color: "#3c2f2f",
     fontWeight: "500",
+    marginTop: 50,
   },
 
   mealTypeContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
     justifyContent: "space-between",
-    marginHorizontal: 10,
-    marginBottom: 7,
-    // height: 50,
+    maxHeight: 45,
+    alignItems: "center",
   },
 
   focusedMealType: {

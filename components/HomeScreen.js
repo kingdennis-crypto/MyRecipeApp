@@ -157,40 +157,46 @@ export default function HomeScreen(props) {
           placeholderTextColor={isDark ? "#4b3832" : "#4b3832"}
         />
       </View>
-      <ScrollView contentContainerStyle={styles.mealTypeContainer} horizontal>
-        <MealtypeCard
-          mealTypes={mealTypes}
-          name="breakfast"
-          changeMealType={changeMealType}
-        />
-        <MealtypeCard
-          mealTypes={mealTypes}
-          name="lunch"
-          changeMealType={changeMealType}
-        />
-        <MealtypeCard
-          mealTypes={mealTypes}
-          name="dinner"
-          changeMealType={changeMealType}
-        />
-        <MealtypeCard
-          mealTypes={mealTypes}
-          name="snack"
-          changeMealType={changeMealType}
-        />
-        <MealtypeCard
-          mealTypes={mealTypes}
-          name="teatime"
-          changeMealType={changeMealType}
-        />
-      </ScrollView>
+      <View>
+        <ScrollView
+          contentContainerStyle={themeStyle.mealTypeContainer}
+          horizontal
+        >
+          <MealtypeCard
+            mealTypes={mealTypes}
+            name="breakfast"
+            changeMealType={changeMealType}
+          />
+          <MealtypeCard
+            mealTypes={mealTypes}
+            name="lunch"
+            changeMealType={changeMealType}
+          />
+          <MealtypeCard
+            mealTypes={mealTypes}
+            name="dinner"
+            changeMealType={changeMealType}
+          />
+          <MealtypeCard
+            mealTypes={mealTypes}
+            name="snack"
+            changeMealType={changeMealType}
+          />
+          <MealtypeCard
+            mealTypes={mealTypes}
+            name="teatime"
+            changeMealType={changeMealType}
+          />
+        </ScrollView>
+      </View>
+
       {noResults ? (
-        <View style={styles.noResultsContainer}>
-          <Text style={styles.noResultText}>No Results</Text>
+        <View style={themeStyle.noResultsContainer}>
+          <Text style={themeStyle.noResultText}>No Results</Text>
         </View>
       ) : (
         <ScrollView
-          style={{ maxHeight: "80%" }}
+          // style={{ maxHeight: "80%" }}
           contentContainerStyle={styles.cardContainer}
         >
           {recipes.map((data) => (

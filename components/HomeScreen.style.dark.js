@@ -79,24 +79,22 @@ export default StyleSheet.create({
   },
 
   noResultsContainer: {
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     flex: 1,
   },
 
   noResultText: {
     fontSize: 48,
-    color: "#3c2f2f",
+    color: "#fff4e6",
     fontWeight: "500",
+    marginTop: 50,
   },
 
   mealTypeContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "space-between",
     marginHorizontal: 10,
-    height: 50,
+    marginBottom: 7,
   },
 
   focusedMealType: {
