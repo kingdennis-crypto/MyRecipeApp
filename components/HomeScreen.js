@@ -39,6 +39,11 @@ export default function HomeScreen(props) {
   const colorScheme = useColorScheme();
   const themeStyle = isDark ? darkStyles : styles;
 
+  // const mealTypesText = [
+  //   "breakfast",
+
+  // ]
+
   useEffect(() => {
     getName();
   }, [myValue]);
@@ -62,7 +67,6 @@ export default function HomeScreen(props) {
     setRecipeUrl(
       `https://api.edamam.com/api/recipes/v2?q=${search}&app_id=c0b00d6c&app_key=47bba455165224ac52240341690bd577&type=public`
     );
-    console.log(recipeUrl);
     try {
       axios.get(recipeUrl).then((res) => {
         setRecipes(res.data.hits);
@@ -97,8 +101,6 @@ export default function HomeScreen(props) {
   }
 
   function changeSearch() {
-    console.log(search);
-    console.log(recipeUrl);
     try {
       axios
         .get(recipeUrl)
@@ -115,8 +117,6 @@ export default function HomeScreen(props) {
         });
     } catch (e) {
       console.log(e);
-    } finally {
-      console.log("End");
     }
   }
 
@@ -157,6 +157,7 @@ export default function HomeScreen(props) {
           onChangeText={(text) => setSearch(text)}
           clearButtonMode="while-editing"
           placeholder="Search..."
+          placeholderTextColor={isDark ? "#4b3832" : "#4b3832"}
         />
       </View>
       <ScrollView
