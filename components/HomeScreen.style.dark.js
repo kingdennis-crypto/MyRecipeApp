@@ -75,8 +75,8 @@ export default StyleSheet.create({
   focusedMealType: {
     margin: 5,
     padding: 5,
-    backgroundColor: "#3c2f2f",
-    color: "#be9b7b",
+    backgroundColor: "#fff4e6",
+    color: "#854442",
     fontWeight: "bold",
     textTransform: "uppercase",
   },
@@ -84,8 +84,8 @@ export default StyleSheet.create({
   normalMealType: {
     margin: 5,
     padding: 5,
-    backgroundColor: "#be9b7b",
-    color: "#3c2f2f",
+    backgroundColor: "#854442",
+    color: "#fff4e6",
     fontWeight: "bold",
     textTransform: "uppercase",
   },

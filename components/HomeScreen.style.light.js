@@ -42,7 +42,7 @@ export default StyleSheet.create({
     // borderColor: "#0A3EED",
     borderColor: "#3c2f2f",
     borderRadius: 7,
-    backgroundColor: "#E4E4E4",
+    backgroundColor: "#f2dec4",
   },
 
   cardContainer: {
