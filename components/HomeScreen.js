@@ -39,10 +39,7 @@ export default function HomeScreen(props) {
   const colorScheme = useColorScheme();
   const themeStyle = isDark ? darkStyles : styles;
 
-  // const mealTypesText = [
-  //   "breakfast",
-
-  // ]
+  const mealTypesText = ["breakfast", "lunch", "dinner", "snack", "teatime"];
 
   useEffect(() => {
     getName();
