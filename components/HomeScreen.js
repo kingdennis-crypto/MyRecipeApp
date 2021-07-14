@@ -157,11 +157,7 @@ export default function HomeScreen(props) {
           placeholderTextColor={isDark ? "#4b3832" : "#4b3832"}
         />
       </View>
-      <ScrollView
-        style={{ maxHeight: 50 }}
-        contentContainerStyle={styles.mealTypeContainer}
-        horizontal
-      >
+      <ScrollView contentContainerStyle={styles.mealTypeContainer} horizontal>
         <MealtypeCard
           mealTypes={mealTypes}
           name="breakfast"
