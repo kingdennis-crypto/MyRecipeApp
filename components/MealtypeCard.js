@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity, Text } from "react-native";
-import styles from "./HomeScreen.style";
+import styles from "./HomeScreen.style.light";
 
 export default function MealtypeCard(props) {
   return (
