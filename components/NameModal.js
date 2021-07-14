@@ -6,7 +6,10 @@ import {
   StyleSheet,
   Button,
   Pressable,
+  useColorScheme,
 } from "react-native";
+import lightStyle from "./HomeScreen.style.light";
+import darkStyle from "./HomeScreen.style.dark";
 import Modal from "react-native-modal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -21,6 +24,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function NameModal(props) {
   const [name, setName] = useState("");
   const [isFocused, setIsFocused] = useState(false);
+
+  const colorScheme = useColorScheme();
+  const [isDark, setIsDark] = useState(colorScheme === "dark");
+  const themeStyle = isDark ? darkStyle : lightStyle;
+
+  React.useEffect(() => {
+    setIsDark(colorScheme === "dark");
+  }, [colorScheme]);
 
   async function StoreName() {
     props.setValue(props.value + 1);
@@ -50,28 +61,16 @@ export default function NameModal(props) {
           props.setIsVisible(false);
           setIsFocused(false);
         }}
+        animationInTiming={600}
+        animationOutTiming={600}
+        backdropTransitionInTiming={600}
+        backdropTransitionOutTiming={600}
+        avoidKeyboard={true}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.titleContainer}>
-            <Text
-              style={{
-                fontSize: 26,
-                fontWeight: "600",
-                marginBottom: 3,
-                color: "#3c2f2f",
-              }}
-            >
-              Please change your name
-            </Text>
-            <Text
-              style={{
-                textTransform: "uppercase",
-                color: "#4b3832",
-                fontWeight: "500",
-              }}
-            >
-              Old Name: {props.name}
-            </Text>
+        <View style={themeStyle.modalContainer}>
+          <View style={{ marginBottom: 15 }}>
+            <Text style={themeStyle.modalTitle}>Please change your name</Text>
+            <Text style={themeStyle.modalOldName}>Old Name: {props.name}</Text>
           </View>
           <View>
             <TextInput
@@ -83,9 +82,14 @@ export default function NameModal(props) {
               onChangeText={setName}
               value={name}
               placeholder="Enter your name..."
+              placeholderTextColor="#4b3832"
             />
-            <Pressable style={styles.submitButton}>
-              <Button title="Change Name" onPress={StoreName} color="#fff4e6" />
+            <Pressable style={themeStyle.submitButton}>
+              <Button
+                title="Change Name"
+                onPress={StoreName}
+                color={isDark ? "#3c2f2f" : "#fff4e6"}
+              />
             </Pressable>
           </View>
         </View>
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "rgba(0,0,0,0.0)",
     borderRadius: 7,
-    backgroundColor: "#E4E4E4",
+    backgroundColor: "#f2dec4",
   },
 
   focusedTextInput: {
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#851e3e",
     borderRadius: 7,
-    backgroundColor: "#E4E4E4",
+    backgroundColor: "#f2dec4",
   },
 
   titleContainer: {
