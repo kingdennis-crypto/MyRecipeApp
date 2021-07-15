@@ -25,7 +25,11 @@ export default function App() {
             component={DetailScreen}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="RecipePage" component={RecipePage} />
+          <Stack.Screen
+            name="RecipePage"
+            component={RecipePage}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </AppearanceProvider>
