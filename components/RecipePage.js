@@ -9,24 +9,15 @@ import {
   useColorScheme,
   SafeAreaView,
 } from "react-native";
-import { color, Transition, Transitioning } from "react-native-reanimated";
-import { Appearance } from "react-native-appearance";
 import uuid from "react-native-uuid";
+import ImageOverlay from "react-native-image-overlay";
+import Icon from "react-native-vector-icons/Ionicons";
 
 import lightStyle from "./RecipePage/RecipePage.style.light";
 import darkStyle from "./RecipePage/RecipePage.style.dark";
 
-const transition = (
-  <Transition.Together>
-    <Transition.In type="fade" durationMs={200} />
-    <Transition.Change />
-    <Transition.Out type="fade" durationMs={200} />
-  </Transition.Together>
-);
-
 export default function RecipePage({ route }) {
   const item = route.params["item"];
-  const ref = React.useRef();
   const [currentIndex, setCurrentIndex] = useState(null);
   const number = Math.floor(Math.random() * 255);
   const [isDark, setIsDark] = useState(colorScheme === "dark");
@@ -40,53 +31,43 @@ export default function RecipePage({ route }) {
 
   return (
     <View style={themeStyle.recipeBody}>
-      <Image style={themeStyle.recipeImage} source={{ uri: item.image }} />
-      <View style={themeStyle.titleContainer}>
-        <Text style={themeStyle.titleText}>{item.label}</Text>
+      <ImageOverlay
+        source={{ uri: item.image }}
+        title={item.label}
+        containerStyle={{ width: "100%", height: 300 }}
+        titleStyle={themeStyle.titleStyle}
+      />
+      <View style={themeStyle.container}>
+        <View style={themeStyle.descriptionContainer}>
+          <View style={themeStyle.descriptionItem}>
+            <Icon
+              name="time-outline"
+              size={18}
+              color={isDark ? "#be9b7b" : "#854442"}
+              style={{ marginRight: 5, fontWeight: "500" }}
+            />
+            <Text style={themeStyle.descriptionText}>{item.mealType}</Text>
+          </View>
+          <View style={themeStyle.descriptionItem}>
+            <Icon
+              name="timer-outline"
+              size={18}
+              color={isDark ? "#be9b7b" : "#854442"}
+              style={{ marginRight: 5, fontWeight: "500" }}
+            />
+            <Text style={themeStyle.descriptionText}>{item.totalTime} min</Text>
+          </View>
+          <View style={themeStyle.descriptionItem}>
+            <Icon
+              name="flag-outline"
+              size={18}
+              color={isDark ? "#be9b7b" : "#854442"}
+              style={{ marginRight: 5, fontWeight: "500" }}
+            />
+            <Text style={themeStyle.descriptionText}>{item.cuisineType}</Text>
+          </View>
+        </View>
       </View>
     </View>
-    // <SafeAreaView style={themeStyle.container}>
-    //   <Image
-    //     style={{ width: "100%", height: 250 }}
-    //     source={{ uri: item.image }}
-    //   />
-    //   <View style={themeStyle.textContainer}>
-    //     <View style={themeStyle.textContainer2}>
-    //       <Text style={lightStyle.titleText}>{item.label}</Text>
-    //       <Text>{item.mealType}</Text>
-    //       <Text>{item.totalTime} min</Text>
-    //       <Text>{Math.floor(item.totalWeight)} gram</Text>
-    //       <Text>{Math.floor(item.calories)} kcal</Text>
-    //     </View>
-    //     <View style={lightStyle.ingredientsContainer}>
-    //       <Text style={lightStyle.ingredientsTitle}>Ingredients</Text>
-
-    //       <Transitioning.View ref={ref} transition={transition}>
-    //         {item.ingredients.map((item, index) => (
-    //           <TouchableOpacity
-    //             onPress={() => {
-    //               ref.current.animateNextTransition();
-    //               setCurrentIndex(index === currentIndex ? null : index);
-    //             }}
-    //             style={{ marginVertical: 10 }}
-    //             key={uuid.v4()}
-    //           >
-    //             <Text>{item.text}</Text>
-    //             {index === currentIndex && (
-    //               <View
-    //                 style={{
-    //                   backgroundColor: `rgb(${number}, ${number}, ${number})`,
-    //                 }}
-    //               >
-    //                 <Text>{item.foodCategory}</Text>
-    //                 <Text>{item.weight}</Text>
-    //               </View>
-    //             )}
-    //           </TouchableOpacity>
-    //         ))}
-    //       </Transitioning.View>
-    //     </View>
-    //   </View>
-    // </SafeAreaView>
   );
 }
