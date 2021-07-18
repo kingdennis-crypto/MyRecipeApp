@@ -8,6 +8,9 @@ import {
   ScrollView,
   useColorScheme,
   SafeAreaView,
+  linking,
+  Linking,
+  Alert,
 } from "react-native";
 import uuid from "react-native-uuid";
 import ImageOverlay from "react-native-image-overlay";
@@ -66,6 +69,24 @@ export default function RecipePage({ route }) {
             />
             <Text style={themeStyle.descriptionText}>{item.cuisineType}</Text>
           </View>
+        </View>
+        <View>
+          <TouchableOpacity>
+            <Text
+              style={themeStyle.sourceLink}
+              onPress={() => {
+                const supported = Linking.canOpenURL(item.url);
+                if (supported) {
+                  Linking.openURL(item.url);
+                } else {
+                  Alert.alert("I can't open this link :(");
+                }
+              }}
+            >
+              Source: {item.source}
+            </Text>
+          </TouchableOpacity>
+          <Text>{item.url}</Text>
         </View>
       </View>
     </View>

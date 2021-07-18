@@ -37,4 +37,10 @@ export default StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
   },
+
+  sourceLink: {
+    fontSize: 22,
+    color: "#3c2f2f",
+    fontWeight: "500",
+  },
 });
