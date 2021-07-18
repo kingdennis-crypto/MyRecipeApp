@@ -59,6 +59,7 @@ export default StyleSheet.create({
     fontSize: 24,
     fontWeight: "500",
     color: "#fff4e6",
+    marginVertical: 7,
   },
 
   ingredientsList: {
