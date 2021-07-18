@@ -43,4 +43,13 @@ export default StyleSheet.create({
     color: "#fff4e6",
     fontWeight: "500",
   },
+
+  goBackContainer: {
+    position: "absolute",
+    top: 55,
+    left: 15,
+    padding: 10,
+    backgroundColor: "rgba(255,255,255,0.6)",
+    borderRadius: 7,
+  },
 });

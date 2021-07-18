@@ -15,6 +15,7 @@ import {
 import uuid from "react-native-uuid";
 import ImageOverlay from "react-native-image-overlay";
 import Icon from "react-native-vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
 
 import lightStyle from "./RecipePage/RecipePage.style.light";
 import darkStyle from "./RecipePage/RecipePage.style.dark";
@@ -27,6 +28,7 @@ export default function RecipePage({ route }) {
 
   const colorScheme = useColorScheme();
   const themeStyle = isDark ? darkStyle : lightStyle;
+  const navigation = useNavigation();
 
   useEffect(() => {
     setIsDark(colorScheme === "dark");
@@ -40,6 +42,14 @@ export default function RecipePage({ route }) {
         containerStyle={{ width: "100%", height: 300 }}
         titleStyle={themeStyle.titleStyle}
       />
+      <TouchableOpacity
+        style={themeStyle.goBackContainer}
+        onPress={() => {
+          navigation.goBack();
+        }}
+      >
+        <Icon name="chevron-back-outline" size={28} color={"#000"} />
+      </TouchableOpacity>
       <View style={themeStyle.container}>
         <View style={themeStyle.descriptionContainer}>
           <View style={themeStyle.descriptionItem}>
