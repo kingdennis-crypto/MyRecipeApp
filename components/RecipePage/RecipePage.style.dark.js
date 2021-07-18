@@ -22,6 +22,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginVertical: 10,
+    flexWrap: "wrap",
   },
 
   descriptionItem: {
@@ -39,9 +40,10 @@ export default StyleSheet.create({
   },
 
   sourceLink: {
-    fontSize: 22,
+    fontSize: 18,
     color: "#fff4e6",
     fontWeight: "500",
+    marginBottom: 20,
   },
 
   goBackContainer: {
@@ -51,5 +53,37 @@ export default StyleSheet.create({
     padding: 10,
     backgroundColor: "rgba(255,255,255,0.6)",
     borderRadius: 7,
+  },
+
+  ingredientsTitle: {
+    fontSize: 24,
+    fontWeight: "500",
+    color: "#fff4e6",
+  },
+
+  ingredientsList: {
+    flexDirection: "row",
+    margin: 5,
+    alignItems: "center",
+    borderRadius: 7,
+    backgroundColor: "#be9b7b",
+    overflow: "hidden",
+  },
+
+  ingredientsItem: {
+    flexDirection: "column",
+    marginHorizontal: 10,
+  },
+
+  ingredientsText: {
+    fontWeight: "500",
+    color: "#fff4e6",
+  },
+
+  ingredienstCategoryText: {
+    fontWeight: "500",
+    textTransform: "uppercase",
+    color: "rgba(255, 244, 229, 0.6)",
+    fontStyle: "italic",
   },
 });

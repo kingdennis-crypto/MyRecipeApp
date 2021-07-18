@@ -52,4 +52,18 @@ export default StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.6)",
     borderRadius: 7,
   },
+
+  ingredientsList: {
+    flexDirection: "row",
+    margin: 5,
+    alignItems: "center",
+    borderRadius: 7,
+    backgroundColor: "#be9b7b",
+  },
+
+  ingredientsText: {
+    marginHorizontal: 10,
+    fontWeight: "500",
+    color: "#3c2f2f",
+  },
 });

@@ -96,7 +96,25 @@ export default function RecipePage({ route }) {
               Source: {item.source}
             </Text>
           </TouchableOpacity>
-          <Text>{item.url}</Text>
+          <View>
+            <Text style={themeStyle.ingredientsTitle}>Ingredients</Text>
+            <ScrollView>
+              {item.ingredients.map((data) => (
+                <View key={uuid.v4()} style={themeStyle.ingredientsList}>
+                  <Image
+                    source={{ uri: data.image }}
+                    style={{ width: 75, height: 75 }}
+                  />
+                  <View style={themeStyle.ingredientsItem}>
+                    <Text style={themeStyle.ingredientsText}>{data.text}</Text>
+                    <Text style={themeStyle.ingredienstCategoryText}>
+                      {data.foodCategory}
+                    </Text>
+                  </View>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
         </View>
       </View>
     </View>
