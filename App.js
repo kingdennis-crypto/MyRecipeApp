@@ -7,6 +7,7 @@ import { AppearanceProvider } from "react-native-appearance";
 import HomeScreen from "./components/HomeScreen";
 import DetailScreen from "./components/DetailScreen/DetailScreen";
 import RecipePage from "./components/RecipePage";
+import BookmarkPage from "./components/Bookmark/BookmarkPage";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -28,6 +29,11 @@ export default function App() {
           <Stack.Screen
             name="RecipePage"
             component={RecipePage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="BookmarkPage"
+            component={BookmarkPage}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
