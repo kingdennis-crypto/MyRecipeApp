@@ -1,12 +1,27 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView, Text, View, StyleSheet } from "react-native";
+import BookmarkCard from "./BookmarkCard";
 
 export default function BookmarkPage() {
   return (
-    <SafeAreaView
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    >
-      <Text>Bookmark</Text>
+    <SafeAreaView>
+      <View style={styles.titleSection}>
+        <Text style={styles.title}>Bookmark</Text>
+      </View>
+      <BookmarkCard />
+      <BookmarkCard />
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  titleSection: {
+    height: "25%",
+  },
+
+  title: {
+    fontSize: 34,
+    fontWeight: "600",
+    padding: 15,
+  },
+});
