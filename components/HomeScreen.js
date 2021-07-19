@@ -17,6 +17,7 @@ import axios from "axios";
 import MealtypeCard from "./MealtypeCard";
 import Icon from "react-native-vector-icons/Ionicons";
 import NameModal from "./NameModal";
+import FAB from "./FAB";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { Appearance } from "react-native-appearance";
@@ -124,6 +125,7 @@ export default function HomeScreen(props) {
   return (
     <SafeAreaView style={themeStyle.backgroundStyle}>
       <StatusBar barStyle="dark-content" translucent={true} />
+      <FAB />
       <NameModal
         isVisible={modalVisible}
         setIsVisible={setModalVisible}
