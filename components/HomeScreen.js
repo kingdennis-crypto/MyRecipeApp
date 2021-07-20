@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   useColorScheme,
+  Image,
 } from "react-native";
 import RecipeCard from "./RecipeCard";
 import uuid from "react-native-uuid";
@@ -194,7 +195,18 @@ export default function HomeScreen(props) {
 
       {noResults ? (
         <View style={themeStyle.noResultsContainer}>
-          <Text style={themeStyle.noResultText}>No Results</Text>
+          {/* <Text style={themeStyle.noResultText}>No Results</Text> */}
+          <Image
+            style={{
+              width: 300,
+              height: 300,
+            }}
+            source={
+              isDark
+                ? require("../assets/icon-dark.png")
+                : require("../assets/icon-light.png")
+            }
+          />
         </View>
       ) : (
         <ScrollView
