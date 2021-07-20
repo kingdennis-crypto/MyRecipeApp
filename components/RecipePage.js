@@ -20,6 +20,8 @@ import { useNavigation } from "@react-navigation/native";
 import lightStyle from "./RecipePage/RecipePage.style.light";
 import darkStyle from "./RecipePage/RecipePage.style.dark";
 
+import TopBar from "./RecipePage/TopBar";
+
 export default function RecipePage({ route }) {
   const item = route.params["item"];
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -42,14 +44,7 @@ export default function RecipePage({ route }) {
         containerStyle={{ width: "100%", height: 300 }}
         titleStyle={themeStyle.titleStyle}
       />
-      <TouchableOpacity
-        style={themeStyle.goBackContainer}
-        onPress={() => {
-          navigation.goBack();
-        }}
-      >
-        <Icon name="chevron-back-outline" size={28} color={"#000"} />
-      </TouchableOpacity>
+      <TopBar item={item} />
       <View style={themeStyle.container}>
         <View style={themeStyle.descriptionContainer}>
           <View style={themeStyle.descriptionItem}>
