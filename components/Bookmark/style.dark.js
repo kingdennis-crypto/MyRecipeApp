@@ -8,6 +8,8 @@ export default StyleSheet.create({
 
   titleSection: {
     height: "10%",
+    flexDirection: "row",
+    alignItems: "center",
   },
 
   title: {

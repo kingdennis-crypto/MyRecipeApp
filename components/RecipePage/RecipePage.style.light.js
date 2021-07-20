@@ -53,6 +53,15 @@ export default StyleSheet.create({
     borderRadius: 7,
   },
 
+  bookmarkContainer: {
+    position: "absolute",
+    top: 55,
+    right: 15,
+    padding: 10,
+    backgroundColor: "rgba(255,255,255,0.6)",
+    borderRadius: 7,
+  },
+
   ingredientsList: {
     flexDirection: "row",
     margin: 5,
