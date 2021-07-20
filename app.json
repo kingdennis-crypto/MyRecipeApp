@@ -4,7 +4,7 @@
     "slug": "MyRecipeApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon-light.png",
     "owner": "lambda-phi",
     "splash": {
       "image": "./assets/splash.png",
@@ -28,7 +28,7 @@
       "userInterfaceStyle": "automatic"
     },
     "web": {
-      "favicon": "./assets/icon.png"
+      "favicon": "./assets/icon-light.png"
     }
   }
 }
