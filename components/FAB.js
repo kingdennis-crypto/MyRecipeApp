@@ -13,7 +13,7 @@ export default function FAB() {
         position: "absolute",
         bottom: 35,
         right: 35,
-        backgroundColor: "rgb(255,255,255)",
+        backgroundColor: "#f2dec4",
         borderRadius: 25,
         width: 65,
         height: 65,
