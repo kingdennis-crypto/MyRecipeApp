@@ -53,6 +53,23 @@ export default function NameModal(props) {
     }
   }
 
+  async function ClearKeys() {
+    try {
+      await AsyncStorage.clear();
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function GetAllKeys() {
+    try {
+      const value = await AsyncStorage.getAllKeys();
+      console.log(value);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <View>
       <Modal
@@ -91,6 +108,8 @@ export default function NameModal(props) {
                 color={isDark ? "#3c2f2f" : "#fff4e6"}
               />
             </Pressable>
+            <Button title="Clear" onPress={ClearKeys} />
+            <Button title="Keys" onPress={GetAllKeys} />
           </View>
         </View>
       </Modal>
