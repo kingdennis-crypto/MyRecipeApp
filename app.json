@@ -29,6 +29,11 @@
     },
     "web": {
       "favicon": "./assets/icon-light.png"
+    },
+    "splash": {
+      "image": "./assets/icon-light.png",
+      "backgroundColor": "#FFF4E6",
+      "resizeMode": "contain"
     }
   }
 }
