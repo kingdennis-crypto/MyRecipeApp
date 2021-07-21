@@ -21,7 +21,6 @@ import NameModal from "./NameModal";
 import FAB from "./FAB";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { Appearance } from "react-native-appearance";
 
 export default function HomeScreen(props) {
   const [recipes, setRecipes] = useState([]);
