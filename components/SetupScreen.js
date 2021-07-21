@@ -7,6 +7,7 @@ import {
   TextInput,
   useColorScheme,
   Pressable,
+  Alert,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -25,12 +26,16 @@ export default function SetupScreen() {
 
   async function clearFirstTime() {
     try {
-      await AsyncStorage.setItem("@FirstTime", "yes");
-      await AsyncStorage.setItem("Name", name);
+      if (!name.trim()) {
+        Alert.alert("You haven't entered your name");
+        return;
+      } else {
+        await AsyncStorage.setItem("@FirstTime", "yes");
+        await AsyncStorage.setItem("Name", name);
+        navigation.navigate("Home");
+      }
     } catch (e) {
       console.log(e);
-    } finally {
-      navigation.navigate("Home");
     }
   }
 
