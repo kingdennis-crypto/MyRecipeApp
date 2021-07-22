@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, Button, StyleSheet } from "react-native";
 
-export default function CuisineButton(props) {
+export default function ModalButton(props) {
   return (
     <Pressable
       style={[
@@ -14,7 +14,7 @@ export default function CuisineButton(props) {
       <Button
         title={props.title}
         onPress={() => {
-          props.setTitle(props.title.toLowerCase());
+          props.setTitle(props.title);
           props.setVisible(false);
         }}
         color={props.isDark ? "#3c2f2f" : "#fff4e6"}
