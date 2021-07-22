@@ -12,12 +12,14 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
+import uuid from "react-native-uuid";
 
 import darkStyle from "./style.dark";
 import lightStyle from "./style.light";
 
 import MealTypeModal from "./MealTypeModal";
 import CuisineTypeModal from "./CuisineTypeModal";
+import ConfirmationModal from "./ConfirmationModal";
 
 export default function AddRecipePage() {
   const [isDark, setIsDark] = useState(colorScheme === "dark");
@@ -33,6 +35,9 @@ export default function AddRecipePage() {
   const [cuisineTypeModal, setCuisineTypeModal] = useState(false);
   const [cuisineTypeTitle, setCuisineTypeTitle] = useState("Cuisine Type");
 
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [recipeItem, setRecipeItem] = useState([]);
+
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
   const themeStyle = isDark ? darkStyle : lightStyle;
@@ -40,6 +45,24 @@ export default function AddRecipePage() {
   useEffect(() => {
     setIsDark(colorScheme === "dark");
   }, [colorScheme]);
+
+  async function addToRecipeItem() {
+    setRecipeItem([]);
+    try {
+      setRecipeItem([
+        {
+          label: label,
+          time: min,
+          mealtype: mealTypeTitle.toLowerCase(),
+          cuisinetype: cuisineTypeTitle.toLowerCase(),
+        },
+      ]);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setConfirmModal(true);
+    }
+  }
 
   return (
     <KeyboardAvoidingView
@@ -55,6 +78,11 @@ export default function AddRecipePage() {
         isVisible={cuisineTypeModal}
         setIsVisible={setCuisineTypeModal}
         setTitle={setCuisineTypeTitle}
+      />
+      <ConfirmationModal
+        isVisible={confirmModal}
+        item={recipeItem}
+        setIsVisible={setConfirmModal}
       />
       <View
         style={{
@@ -146,7 +174,11 @@ export default function AddRecipePage() {
       </View>
       <View style={themeStyle.saveButtonContainer}>
         <Pressable style={themeStyle.saveButtonItem}>
-          <Button title="Save Item" color={isDark ? "#3c2f2f" : "#f2dec4"} />
+          <Button
+            title="Save Item"
+            color={isDark ? "#3c2f2f" : "#f2dec4"}
+            onPress={addToRecipeItem}
+          />
         </Pressable>
       </View>
     </KeyboardAvoidingView>
