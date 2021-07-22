@@ -12,7 +12,6 @@ export default StyleSheet.create({
     borderColor: "rgba(0,0,0,0.0)",
     borderRadius: 7,
     backgroundColor: "#f2dec4",
-    margin: 5,
   },
 
   focusedTextInput: {
@@ -21,6 +20,48 @@ export default StyleSheet.create({
     borderColor: "#851e3e",
     borderRadius: 7,
     backgroundColor: "#f2dec4",
-    margin: 5,
+  },
+
+  label: {
+    fontSize: 20,
+    fontWeight: "500",
+    marginBottom: 5,
+  },
+
+  textContainer: {
+    padding: 10,
+  },
+
+  boxContainer: {
+    flexDirection: "row",
+    paddingVertical: 10,
+  },
+
+  boxItem: {
+    flexDirection: "column",
+    flex: 1,
+    padding: 10,
+    borderRadius: 7,
+  },
+
+  boxText: {
+    color: "#fff4e6",
+    fontSize: 20,
+    fontWeight: "500",
+    marginVertical: 5,
+  },
+
+  boxButton: {
+    borderRadius: 7,
+    backgroundColor: "#f2dec4",
+  },
+
+  saveButtonContainer: {
+    padding: 10,
+  },
+
+  saveButtonItem: {
+    backgroundColor: "#f2dec4",
+    borderRadius: 7,
   },
 });

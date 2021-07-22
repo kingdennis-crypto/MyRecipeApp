@@ -71,50 +71,79 @@ export default function AddRecipePage() {
           <Icon name="chevron-back-outline" size={28} color="#3c2f2f" />
         </TouchableOpacity>
       </View>
-      <Text>Label</Text>
-      <TextInput
-        onFocus={() => setIsFocused(!isFocused)}
-        onEndEditing={() => setIsFocused(!isFocused)}
-        style={
-          isFocused ? themeStyle.focusedTextInput : themeStyle.textInputStyle
-        }
-        onChangeText={setLabel}
-        value={label}
-        placeholder="Enter your name..."
-        placeholderTextColor="#4b3832"
-        clearButtonMode="while-editing"
-      />
-      <Text>Minutes</Text>
-      <TextInput
-        onFocus={() => setMinIsFocused(!minIsFocused)}
-        onEndEditing={() => setMinIsFocused(!minIsFocused)}
-        style={
-          minIsFocused ? themeStyle.focusedTextInput : themeStyle.textInputStyle
-        }
-        onChangeText={setMin}
-        value={min}
-        placeholder="Enter the preparation time..."
-        placeholderTextColor="#4b3832"
-        clearButtonMode="while-editing"
-        keyboardType="number-pad"
-      />
-      <Button title={mealTypeTitle} onPress={() => setMealTypeModal(true)} />
-      <Pressable
-        style={{
-          padding: 5,
-          backgroundColor: "rgba(0,0,0,0.2)",
-          borderRadius: 7,
-          margin: 10,
-        }}
-      >
-        <Button
-          title={cuisineTypeTitle}
-          onPress={() => setCuisineTypeModal(true)}
+      <View style={themeStyle.textContainer}>
+        <Text
+          style={[
+            themeStyle.label,
+            isDark ? { color: "#fff4e6" } : { color: "#3c2f2f" },
+          ]}
+        >
+          Label
+        </Text>
+        <TextInput
+          onFocus={() => setIsFocused(!isFocused)}
+          onEndEditing={() => setIsFocused(!isFocused)}
+          style={
+            isFocused ? themeStyle.focusedTextInput : themeStyle.textInputStyle
+          }
+          onChangeText={setLabel}
+          value={label}
+          placeholder="Enter your name..."
+          placeholderTextColor="#4b3832"
+          clearButtonMode="while-editing"
         />
-      </Pressable>
-
-      <View style={{ zIndex: 1 }}>
-        <Button title="Press Me" />
+      </View>
+      <View style={themeStyle.textContainer}>
+        <Text
+          style={[
+            themeStyle.label,
+            isDark ? { color: "#fff4e6" } : { color: "#3c2f2f" },
+          ]}
+        >
+          Minutes
+        </Text>
+        <TextInput
+          onFocus={() => setMinIsFocused(!minIsFocused)}
+          onEndEditing={() => setMinIsFocused(!minIsFocused)}
+          style={
+            minIsFocused
+              ? themeStyle.focusedTextInput
+              : themeStyle.textInputStyle
+          }
+          onChangeText={setMin}
+          value={min}
+          placeholder="Enter the preparation time..."
+          placeholderTextColor="#4b3832"
+          clearButtonMode="while-editing"
+          keyboardType="number-pad"
+        />
+      </View>
+      <View style={themeStyle.boxContainer}>
+        <View style={themeStyle.boxItem}>
+          <Text style={themeStyle.boxText}>Mealtype</Text>
+          <Pressable style={themeStyle.boxButton}>
+            <Button
+              title={mealTypeTitle}
+              onPress={() => setMealTypeModal(true)}
+              color="#3c2f2f"
+            />
+          </Pressable>
+        </View>
+        <View style={themeStyle.boxItem}>
+          <Text style={themeStyle.boxText}>Cuisinetype</Text>
+          <Pressable style={themeStyle.boxButton}>
+            <Button
+              title={cuisineTypeTitle}
+              onPress={() => setCuisineTypeModal(true)}
+              color="#3c2f2f"
+            />
+          </Pressable>
+        </View>
+      </View>
+      <View style={themeStyle.saveButtonContainer}>
+        <Pressable style={themeStyle.saveButtonItem}>
+          <Button title="Save Item" color={isDark ? "#3c2f2f" : "#f2dec4"} />
+        </Pressable>
       </View>
     </SafeAreaView>
   );
