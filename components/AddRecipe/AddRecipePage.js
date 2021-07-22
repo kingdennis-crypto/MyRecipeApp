@@ -7,6 +7,7 @@ import {
   useColorScheme,
   TextInput,
   Button,
+  Pressable,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -26,7 +27,10 @@ export default function AddRecipePage() {
   const [minIsFocused, setMinIsFocused] = useState(false);
 
   const [mealTypeModal, setMealTypeModal] = useState(false);
+  const [mealTypeTitle, setMealTypeTitle] = useState("Meal Type");
+
   const [cuisineTypeModal, setCuisineTypeModal] = useState(false);
+  const [cuisineTypeTitle, setCuisineTypeTitle] = useState("Cuisine Type");
 
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
@@ -41,10 +45,12 @@ export default function AddRecipePage() {
       <MealTypeModal
         isVisible={mealTypeModal}
         setIsVisible={setMealTypeModal}
+        setTitle={setMealTypeTitle}
       />
       <CuisineTypeModal
         isVisible={cuisineTypeModal}
         setIsVisible={setCuisineTypeModal}
+        setTitle={setCuisineTypeTitle}
       />
       <View
         style={{
@@ -92,11 +98,20 @@ export default function AddRecipePage() {
         clearButtonMode="while-editing"
         keyboardType="number-pad"
       />
-      <Button title="Mealtype modal" onPress={() => setMealTypeModal(true)} />
-      <Button
-        title="Cuisinetype modal"
-        onPress={() => setCuisineTypeModal(true)}
-      />
+      <Button title={mealTypeTitle} onPress={() => setMealTypeModal(true)} />
+      <Pressable
+        style={{
+          padding: 5,
+          backgroundColor: "rgba(0,0,0,0.2)",
+          borderRadius: 7,
+          margin: 10,
+        }}
+      >
+        <Button
+          title={cuisineTypeTitle}
+          onPress={() => setCuisineTypeModal(true)}
+        />
+      </Pressable>
 
       <View style={{ zIndex: 1 }}>
         <Button title="Press Me" />
