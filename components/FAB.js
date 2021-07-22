@@ -8,17 +8,17 @@ export default function FAB() {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
+    <View
       style={{
         position: "absolute",
         bottom: 35,
         right: 35,
         backgroundColor: "#f2dec4",
         borderRadius: 25,
-        width: 65,
+        width: 125,
         height: 65,
         zIndex: 10,
-        justifyContent: "center",
+        justifyContent: "space-around",
         alignItems: "center",
 
         shadowColor: "#000",
@@ -30,12 +30,23 @@ export default function FAB() {
         shadowRadius: 3.84,
 
         elevation: 5,
-      }}
-      onPress={() => {
-        navigation.navigate("BookmarkPage");
+        flexDirection: "row",
       }}
     >
-      <Icon name="bookmark-outline" size={38} color="#000" />
-    </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("AddRecipePage");
+        }}
+      >
+        <Icon name="add-outline" size={38} color="#000" />
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("BookmarkPage");
+        }}
+      >
+        <Icon name="bookmark-outline" size={38} color="#000" />
+      </TouchableOpacity>
+    </View>
   );
 }
