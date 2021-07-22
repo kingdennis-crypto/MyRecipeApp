@@ -10,6 +10,13 @@ import DetailScreen from "./components/DetailScreen/DetailScreen";
 import RecipePage from "./components/RecipePage";
 import BookmarkPage from "./components/Bookmark/BookmarkPage";
 import SetupScreen from "./components/SetupScreen";
+import AddRecipePage from "./components/AddRecipe/AddRecipePage";
+
+// #4b3832
+// #854442
+// #fff4e6
+// #3c2f2f
+// #be9b7b
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -82,6 +89,11 @@ export default function App() {
         <Stack.Screen
           name="BookmarkPage"
           component={BookmarkPage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddRecipePage"
+          component={AddRecipePage}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
