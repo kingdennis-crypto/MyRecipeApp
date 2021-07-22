@@ -4,6 +4,7 @@ export default StyleSheet.create({
   body: {
     flex: 1,
     backgroundColor: "#3c2f2f",
+    paddingTop: 40,
   },
 
   textInputStyle: {

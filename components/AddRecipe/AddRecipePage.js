@@ -8,6 +8,7 @@ import {
   TextInput,
   Button,
   Pressable,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -41,7 +42,10 @@ export default function AddRecipePage() {
   }, [colorScheme]);
 
   return (
-    <SafeAreaView style={themeStyle.body}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={themeStyle.body}
+    >
       <MealTypeModal
         isVisible={mealTypeModal}
         setIsVisible={setMealTypeModal}
@@ -145,6 +149,6 @@ export default function AddRecipePage() {
           <Button title="Save Item" color={isDark ? "#3c2f2f" : "#f2dec4"} />
         </Pressable>
       </View>
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
