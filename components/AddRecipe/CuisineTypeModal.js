@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -6,125 +6,255 @@ import {
   Button,
   ScrollView,
   Pressable,
+  useColorScheme,
 } from "react-native";
 import Modal from "react-native-modal";
 
 export default function CuisineTypeModal(props) {
+  const [isDark, setIsDark] = useState(colorScheme === "dark");
+  const colorScheme = useColorScheme();
+
+  useEffect(() => {
+    setIsDark(colorScheme === "dark");
+  }, [colorScheme]);
+
   return (
     <Modal
       isVisible={props.isVisible}
       onBackdropPress={() => props.setIsVisible(false)}
     >
-      <View style={styles.modalBody}>
-        <Text style={styles.modalTitle}>CuisineType</Text>
+      <View
+        style={[
+          styles.modalBody,
+          isDark
+            ? { backgroundColor: "#3c2f2f" }
+            : { backgroundColor: "#fff4e6" },
+        ]}
+      >
+        <Text
+          style={[
+            styles.modalTitle,
+            isDark ? { color: "#fff4e6" } : { color: "#3c2f2f" },
+          ]}
+        >
+          CuisineType
+        </Text>
         <ScrollView>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="American" />
+            <Button title="American" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Asian" />
+            <Button title="Asian" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="British" />
+            <Button title="British" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Caribbean" />
+            <Button title="Caribbean" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Central Europe" />
+            <Button
+              title="Central Europe"
+              color={isDark ? "#3c2f2f" : "#fff4e6"}
+            />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Chinese" />
+            <Button title="Chinese" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Eastern Europe" />
+            <Button
+              title="Eastern Europe"
+              color={isDark ? "#3c2f2f" : "#fff4e6"}
+            />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="French" />
+            <Button title="French" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Indian" />
+            <Button title="Indian" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Italian" />
+            <Button title="Italian" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Japanese" />
+            <Button title="Japanese" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Kosher" />
+            <Button title="Kosher" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Mediterranean" />
+            <Button
+              title="Mediterranean"
+              color={isDark ? "#3c2f2f" : "#fff4e6"}
+            />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Mexican" />
+            <Button title="Mexican" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Middle Eastern" />
+            <Button
+              title="Middle Eastern"
+              color={isDark ? "#3c2f2f" : "#fff4e6"}
+            />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="Nordic" />
+            <Button title="Nordic" color={isDark ? "#3c2f2f" : "#fff4e6"} />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="South American" />
+            <Button
+              title="South American"
+              color={isDark ? "#3c2f2f" : "#fff4e6"}
+            />
           </Pressable>
           <Pressable
             onPress={() => console.log("Hello")}
-            style={styles.buttonStyle}
+            style={[
+              styles.buttonStyle,
+              isDark
+                ? { backgroundColor: "#fff4e6", color: "#3c2f2f" }
+                : { backgroundColor: "#3c2f2f", color: "#fff4e6" },
+            ]}
           >
-            <Button title="South East Asian" />
+            <Button
+              title="South East Asian"
+              color={isDark ? "#3c2f2f" : "#fff4e6"}
+            />
           </Pressable>
         </ScrollView>
       </View>
@@ -135,7 +265,7 @@ export default function CuisineTypeModal(props) {
 const styles = StyleSheet.create({
   modalBody: {
     height: 300,
-    backgroundColor: "#FFF",
+    backgroundColor: "#fff4e6",
     borderRadius: 7,
     padding: 10,
   },
@@ -150,5 +280,6 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 22,
     fontWeight: "500",
+    marginBottom: 10,
   },
 });
