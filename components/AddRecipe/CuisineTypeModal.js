@@ -3,14 +3,12 @@ import {
   View,
   Text,
   StyleSheet,
-  Button,
   ScrollView,
-  Pressable,
   useColorScheme,
 } from "react-native";
 import Modal from "react-native-modal";
 import uuid from "react-native-uuid";
-import CuisineButton from "./CuisineButton";
+import ModalButton from "./ModalButton";
 
 export default function CuisineTypeModal(props) {
   const [isDark, setIsDark] = useState(colorScheme === "dark");
@@ -65,7 +63,7 @@ export default function CuisineTypeModal(props) {
         </Text>
         <ScrollView>
           {cuisines.map((item) => (
-            <CuisineButton
+            <ModalButton
               key={uuid.v4()}
               title={item}
               isDark={isDark}
