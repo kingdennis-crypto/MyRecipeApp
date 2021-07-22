@@ -23,7 +23,7 @@ export default function AddRecipePage() {
   const [isFocused, setIsFocused] = useState(false);
   const [label, setLabel] = useState("");
 
-  const [min, setMin] = useState(0);
+  const [min, setMin] = useState("");
   const [minIsFocused, setMinIsFocused] = useState(false);
 
   const [mealTypeModal, setMealTypeModal] = useState(false);
